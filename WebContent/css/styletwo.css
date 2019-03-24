@@ -1,0 +1,552 @@
+/*
+<!--
+
+* 17素材vip建站专区模块代码
+* 详尽信息请看官网：http://www.17sucai.com/pins/vip
+*
+* Copyright , 温州易站网络科技有限公司版权所有
+*
+* 请尊重原创，未经允许请勿转载。
+* 在保留版权的前提下可应用于个人或商业用途
+
+-->
+*/
+html,body {
+    color: #333;
+    margin: 0;
+    height: 100%;
+    font-family: "Myriad Set Pro","Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: normal;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a, label, button, input, select {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+img {
+    border: 0;
+}
+
+body {
+    background: #fff;
+    color: #666;
+}
+
+html, body, div, dl, dt, dd, ol, ul, li, h1, h2, h3, h4, h5, h6, p, blockquote, pre, button, fieldset, form, input, legend, textarea, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #08acee;
+}
+
+button {
+    outline: 0;
+}
+
+img {
+    border: 0;
+}
+
+button,input,optgroup,select,textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    outline: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: #666;
+}
+
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix {
+}
+
+
+.divHeight {
+    width: 100%;
+    height: 10px;
+    background: #f5f5f5;
+    position: relative;
+    overflow: hidden;
+}
+
+.r-line {
+    position: relative;
+}
+
+.r-line:after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    height: 100%;
+    border-right: 1px solid #D9D9D9;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+    -webkit-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+}
+
+.b-line {
+    position: relative;
+}
+
+.b-line:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid #e2e2e2;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.aui-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+}
+
+.aui-flex-box {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: #333;
+    padding: 0.3rem;
+}
+.padding{
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+
+}
+.work_ex{
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    border:0.5em solid white;
+    background-color: whitesmoke;
+    height: 1rem;
+}
+.type{
+    border: 1px solid #cdcdcd;
+    padding: 0.7px 2px;
+    border-radius: 0.2em;
+    color:#cdcdcd;
+    margin-right: 0.6rem;
+}
+.type_little{
+    border: 1px solid #08acee;
+    padding: 0.7px 2px;
+    border-radius: 0.2em;
+    color: #08acee;
+    font-size: small;
+}
+.type_normal{
+    border: 1px solid #49be39;
+    padding: 0.7px 2px;
+    border-radius: 0.2em;
+    color: #49be39;
+    font-size: small;
+}
+.type_fire{
+    border: 1px solid #8B0000;
+    padding: 0.7px 2px;
+    border-radius: 0.2em;
+    color: #8B0000;
+    font-size: small;
+}
+.type_state{
+    position: absolute;
+    top:1.6rem;
+    right: 1rem;
+    border: 0.7px solid #08acee;
+    padding: 0.7px 2px;
+    border-radius: 0.2em;
+    color: #08acee;
+    font-size: 1rem;
+}
+.num_share{
+    position: absolute;
+    right: 1rem;
+    color: black;
+}
+.num_view{
+    position: absolute;
+    left: 1rem;
+    color: black;
+}
+.over{
+    color: #cdcdcd;
+}
+.wait_to_open{
+    position: absolute;
+    right: 2.5rem ;
+    color: red
+}
+.already_over{
+    position: absolute;
+    right: 2.5rem ;
+    color: #cdcdcd;
+}
+.type_over{
+    border: 1px solid #cdcdcd;
+    padding: 0.7px 2px;
+    border-radius: 0.2em;
+    color: #cdcdcd;
+    font-size: small;
+}
+.work_time{
+    font-size: smaller;
+    color: #cdcdcd;
+    position: absolute;
+    right: 1.2rem
+}
+.title{
+    display: inline-block;
+    vertical-align: middle;
+
+}
+.detail{
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+
+}
+
+/* 必要布局样式css */
+
+.aui-flexView {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.aui-scrollView {
+    width: 100%;
+    height: 100%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    margin-top:0;
+}
+
+.aui-navBar {
+    height: 70px;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 1002;
+    background: dodgerblue;
+}
+
+
+.aui-navBar-item {
+    height: 70px;
+    min-width: 45%;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 3%;
+    -ms-flex: 0 0 45%;
+    flex: 0 0 45%;
+    padding: 0 0.9rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 3em;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #808080;
+    position: relative;
+}
+
+.aui-navBar-item:first-child {
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    margin-right: -25%;
+    font-size: 1.1rem;
+    color:#555555;
+    font-weight: normal;
+}
+
+.aui-navBar-item:last-child {
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+.aui-center {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 44px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.aui-center-title {
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    border: none;
+    float: left;
+    background-size: 20px;
+    background-repeat: no-repeat;
+}
+
+.icon-return{
+    margin-right:1rem;
+    background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxNzdiOTMzMy03M2YwLTM4NDgtODQwNy0xN2Y5YjkyNmIwNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDNEQjdGNzMzRUYwMTFFOEFBRDhCNEZFNEZGQTMwMDciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDNEQjdGNzIzRUYwMTFFOEFBRDhCNEZFNEZGQTMwMDciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ZTg4ZThmODMtYTFhMi1lZTQ1LWI4ZDUtNjYxZTQxMTg2MDBlIiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NjI2MDMyYWYtM2UyMi0xMWU4LWFkNzItZjIzOWZiZDYwOGI4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Cbvk4AAAAd1JREFUeNrsmEsrhGEUx2c0sWFhTMO4TPIBKDZYuMwkSpSVT6F8AGsLOzsfwZ4UuZQhlBhpVhZEyS2Uy/b1P3Xeejq9Ss3zvuZMz6n/4vkvZubXuTzPmbjnebFqiJpYlYQDcSAOxIE4EAeiDSQFrUDzNj80ETFEFjqHknyuhZa0ZaRNQFCMaCutIAiKRU2l1QpdQE3CH4YOtGSEIM4CIMagfS1Tq4vLqVn4OWjb9pclQuyJU6hR+OPQnpZ7JMPlJCGmoC0tF2IHl1Na+JPQepjNGLe4s1MvlAIamyA2tDxR6McX/wvCFkiaIVqEPxEVhI2plWKIjPCnoU0tr98kN7aEmIHWon5Sl5ORVajdOH9Co3x/qNpH6sSZxt+zxsVqFnowzg3QDT9BIo9y7xGaVJfc9GbkoV1Nqy5lpBd6FP4ONKhtZ79jmBfhH0ZZZrZu9nuoD/oIyExe278otwzzJHzaPYYqvdl/20WKAQMgF9YuEhaI/5wv8Ug2gzJT0LJY+QOAyuxV+LSn92sCobiCeqA34R/xPygqSsuMLJdZvfApMycaMmJOs27oXfjH0IAmEIprvjS/hL+gDcSHoQHwbXgFTT0ioxOa45Jb1gxS8U8UB+JAHIgDcSB/jh8BBgB5aV8q6A+LCgAAAABJRU5ErkJggg==');
+}
+.icon-X{
+    margin-right:1rem;
+    background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4BpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5OTJlMDIzYy1kZTA5LWEwNGEtYmUzMy0wZmE3NmYxZTI4NWEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDc4MERCNDg0OUVDMTFFOEIxQzdDOUNBOTI1RjhBRTAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDc4MERCNDc0OUVDMTFFOEIxQzdDOUNBOTI1RjhBRTAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDk1REQ3MjVFQTQ5RTgxMUFBMUZBQTU2QjhDOEYyRUUiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDoyN2Y0NmNmZi0zN2RkLTExZTgtOTZjNS1kNGNlOTE4ZjMxNjMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz55EC4qAAACF0lEQVR42uyZS04CQRCGQYMgURAT3bOFKBFduTHGpTtP4QU4gDfwAD5YqJgYtx7AhW8F5BWNBo0rd7rS+GCsidWxYmBmursGxEwnXzJAP/75u6a6AL9hGL5uaT2+LmqeWE/sfxM7A8TbpGXetoeZulowbXy3JyBm0Y+DXVwrY9XPytlHoAZEgTwQdMnRHLCA1xVVZ00CQB7vugyEmR1dMX5ayq6/00kPccJbIMokdBPnfAXGnYyRmbyEk1+j4zpCs8TRpNNxMgsEgTNcoKThsHD0HZiSGauy2AkJiUHJsVtEaEJ2bRWxAXzYzFaRcHgNx7wBaZVdUY05MyROicMDElufVI11nYekjzhctnjohKMNYFLnwdRNPyHgGMVUm4SE9tZzihUUUNQNeW+DODrGsQ6X2BDJw3vAMsmjaa4Tj7sg2SEia0Ccc37uevaBXD8DddbZGe9cpKd7YJ/EcOSvhcE62f5RfK+Kr68Yagk2sastzvp+4JzUEkOdFuvkrKe1RKRTYkXC/7RJT79riWC7xeZI4TzhsJY4Iikt1i6xOeKobFEiYriOB4mrYrPE0ZRitVYkWWLYLbHbuMiHSuFM6AUucK47mRiWTU8NRUebOVwg1VqYS6w4mV6YhAr8wIHMt2arD0eI0Ibm1ltxSQQnVMXOulHm2XzjWNIJg0VgzuXfuXwYAhm7fn7vPwVPrCfWE9t9Yr8EGADbeig4uUvHSQAAAABJRU5ErkJggg==')
+    }
+.icon-edit{
+    margin-left:1rem;
+    float: right;
+}
+
+.aui-flex-user{
+    width:50px;
+    height:50px;
+    margin-right:0.8rem;
+}
+.aui-flex-user2{
+    width:60px;
+    height:60px;
+    margin-right:0.8rem;
+}
+
+.aui-flex-user img{
+    width:50px;
+    height:50px;
+    display:block;
+    border:1px solid #d6d6d6;
+    border-radius:100%;
+}
+
+.aui-flex-box h2{
+    font-size:0.9rem;
+    margin-bottom:0.4rem;
+}
+
+.aui-flex-box p{
+    font-size:0.8rem;
+    color:#b1b1b1;
+}
+
+.aui-user-btn{
+    background:#49be39;
+    border-radius:3px;
+    color:#fff;
+    font-size:0.85rem;
+    border:1px solid #49be39;
+    outline:none;
+    width:4.1rem;
+    text-align:center;
+    height:2.1rem;
+    line-height:2.1rem;
+}
+
+.aui-user-button .aui-user-info{
+    border:1px solid #d5d5d5;
+    background:#fff;
+    color:#888888;
+}
+
+.
+.aui-users-list .b-line:after{
+    width:90%;
+    left:20px;
+}
+
+
+.chat-button button{
+
+    background-color:orange;
+
+    width: 3.7rem;
+    height: 1.6rem;
+    color: white;
+    border:none;
+    box-shadow: -1px -2px -2px 0 #615959;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+
+}
+input{
+    border: 1px solid #ccc;
+    width: 90%;
+    height: 2.5rem;
+    padding: 7px 1rem;
+    border-radius: 3px;
+    padding-left:5px;
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+}
+input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+.confirm-password{
+    width: 35px ;
+    height: 35px ;
+    position: absolute ;
+    right: 0.3rem;
+}
+.fixed{
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    /*top: 1.5rem;*/
+    display: table-cell;
+    vertical-align: middle;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    z-index: -10000;
+
+}
+.fixed2{
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    top: 1.95rem;
+    vertical-align: middle;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    font-size: 1.15rem;
+    z-index: -10000;
+}
+.miss-message{
+    position: relative;
+    z-index: 99 ;
+    top: -3.4rem;
+    right: -2.8rem ;
+    display: table-cell ;
+    height: 0.6rem ;
+    width: 0.6rem ;
+    background-color: crimson ;
+    border-radius: 0.6rem ;
+    font-size: 0.7rem;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+
+}
+
+
+.friend-detail p{
+    margin-top: 1rem;
+
+}
+.true{
+    text-align: right ;
+    padding-right: 1rem;
+    position: fixed;
+    width: 100%;
+    display:table-cell;
+    vertical-align: middle;
+    right: 0;
+    left: 0;
+}
