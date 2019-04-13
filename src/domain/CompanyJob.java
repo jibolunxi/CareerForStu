@@ -22,7 +22,7 @@ public class CompanyJob {
 	private String three_cityname;
 	private String cert;
 	private int type;
-	private String number;
+	private int number;
 	private int exp_id;
 	private String exp_name;
 	private int report_id;
@@ -189,10 +189,10 @@ public class CompanyJob {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getNumber() {
+	public int getNumber() {
 		return number;
 	}
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 	public int getExp_id() {

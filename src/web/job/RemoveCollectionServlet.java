@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
-import domain.Comfavorite;
+import domain.CompanyCollection;
 import domain.Company;
 import domain.CompanyJob;
 import domain.StuFavorite;

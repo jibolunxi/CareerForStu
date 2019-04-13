@@ -1,6 +1,6 @@
 package domain;
 
-public class Friends {
+public class Friend {
 	private int id;
 	private int uid1;
 	private String uname1;

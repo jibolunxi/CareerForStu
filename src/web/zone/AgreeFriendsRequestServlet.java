@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
-import domain.Friends;
+import domain.Friend;
 import domain.Student;
 import utils.HttpRequest;
 
@@ -32,24 +32,24 @@ public class AgreeFriendsRequestServlet extends HttpServlet {
 		Admin admin = (Admin) session.getAttribute("admin");
 		Admin admin2 = (Admin) session.getAttribute("admin2");
 		
-		Friends friend = new Friends();
+		Friend friend = new Friend();
 		friend.setId(Integer.parseInt((String) session.getAttribute("friendId")));
 		friend.setUid1(admin2.getId());
 		friend.setUid2(admin.getId());
 		friend.setStatus(1);
 		httpRequest.updateFriends(friend);
-		List<Friends> friends = httpRequest.getFriendsListById(admin.getId());
+		List<Friend> friend2 = httpRequest.getFriendsListById(admin.getId());
 		int isFriend = 2;
-		if (friends != null) {
-			for (int i = 0; i < friends.size(); i++) {
-				if (httpRequest.getAdminById(friends.get(i).getUid1()).getItem_id() == admin2.getItem_id()) {
-					isFriend = friends.get(i).getStatus();
+		if (friend2 != null) {
+			for (int i = 0; i < friend2.size(); i++) {
+				if (httpRequest.getAdminById(friend2.get(i).getUid1()).getItem_id() == admin2.getItem_id()) {
+					isFriend = friend2.get(i).getStatus();
 				}
 			}
 		}
 		session.setAttribute("friendId", null);
 		session.setAttribute("isFriend", isFriend);
-		List<Friends> messageList = httpRequest.getMessageListById(admin.getId());
+		List<Friend> messageList = httpRequest.getMessageListById(admin.getId());
 		session.setAttribute("friendsList", messageList);
 		request.getRequestDispatcher(MESSGAE).forward(request, response);
 	}

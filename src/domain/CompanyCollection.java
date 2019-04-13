@@ -1,6 +1,6 @@
 package domain;
 
-public class Comfavorite {
+public class CompanyCollection {
 	private int id;
 	private int com_id;
 	private int resume_id;

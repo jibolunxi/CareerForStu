@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import domain.Admin;
 import domain.Company;
-import domain.Friends;
+import domain.Friend;
 import domain.Student;
 import utils.HttpRequest;
 

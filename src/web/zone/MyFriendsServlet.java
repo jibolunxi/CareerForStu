@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import domain.Admin;
-import domain.Friends;
+import domain.Friend;
 import utils.HttpRequest;
 
 /**
@@ -29,8 +29,8 @@ public class MyFriendsServlet extends HttpServlet {
 
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
-		List<Friends> friends = httpRequest.getFriendsListById(admin.getId());
-		session.setAttribute("friends", friends);
+		List<Friend> friend = httpRequest.getFriendsListById(admin.getId());
+		session.setAttribute("friends", friend);
 		request.getRequestDispatcher(MYFRIENDS).forward(request, response);
 
 	}

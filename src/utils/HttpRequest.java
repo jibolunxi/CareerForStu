@@ -15,25 +15,24 @@ import com.alibaba.fastjson.JSONObject;
 
 import domain.Admin;
 import domain.College;
-import domain.Comfavorite;
 import domain.Company;
+import domain.CompanyCollection;
 import domain.CompanyJob;
 import domain.CompanyJobMin;
 import domain.Department;
-import domain.Friends;
+import domain.Friend;
+import domain.Industry;
 import domain.JobApply;
-import domain.JobExpect;
+import domain.JobInterview;
 import domain.News;
 import domain.StuFavorite;
 import domain.Student;
 import domain.StudentEdu;
 import domain.StudentExp;
-
+import domain.JobClass;
+import domain.JobExpect;
  
 public class HttpRequest {
-	private static String URLROOT = "http://47.96.70.17/career/";
-	private static String URLROOT2 = "http://47.254.22.209:8080/careerdev/";
-	private static String TOKEN = "0e173882280f4303ba144b8b653c1c00";
     /**
      * 向指定URL发送GET方法的请求
      * 
@@ -43,7 +42,10 @@ public class HttpRequest {
      *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果
      */
-
+	private static String URLROOT = "http://47.96.70.17/career/";
+	private static String URLROOT2 = "http://47.254.22.209:8080/careerdev/";
+	private static String TOKEN = "0e173882280f4303ba144b8b653c1c00";
+	
     public static String sendGet(String url, String param) {
         String result = "";
         BufferedReader in = null;
@@ -149,12 +151,12 @@ public class HttpRequest {
     
     public static void main(String[] args) {
 //    	String data="{\"id\": 0,\"name\": \"chenyuhang\"}";
-//    	String s=HttpRequest.sendPost(URLROOT2+"api/merge/admin", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+//    	String s=HttpRequest.sendPost(URLRoot+"api/merge/admin", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
 //    	System.out.println(s);
-//    	String s=HttpRequest.sendGet(URLROOT2+"api/delete/admin", "token=0e173882280f4303ba144b8b653c1c00&id=49");
+//    	String s=HttpRequest.sendGet(URLRoot+"api/delete/admin", "token=0e173882280f4303ba144b8b653c1c00&id=49");
 //    	System.out.println(s);
 //    	String data="{\"id\": 0,\"uid1\": "+1+",\"uname1\": \""+"132"+"\",\"uid2\": "+5+",\"uname2\": \""+"3243"+"\",\"status\": 0,\"msg\": \""+"hhhhhhhhhhhh"+"\"}";
-//    	String s=HttpRequest.sendPost(URLROOT2+"api/merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+//    	String s=HttpRequest.sendPost(URLRoot+"api/merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
 //    	System.out.println(s);
 //    	CompanyJob companyJob = new CompanyJob();
 //    	HttpRequest httpRequest=new HttpRequest();
@@ -162,7 +164,7 @@ public class HttpRequest {
 //    	System.out.println(JSON.toJSONString(companyJob));
     }
     
-  //通过名字获取登录账号
+    //通过名字获取登录账号
     public Admin getAdminByName(String name) {
 		Admin admin=new Admin();
 		String s=HttpRequest.sendPost(URLROOT+"api/get/admin", "token="+TOKEN+"&where=name=\""+name+"\"");
@@ -171,6 +173,244 @@ public class HttpRequest {
 		if(data.size()!=0) {
 			admin = JSON.parseObject(data.get(0).toString(),Admin.class);
 			return admin;
+		}
+		return null;
+	}
+    
+    //通过admin中id获取职位列表
+	public List<CompanyJobMin> getCompanyJobMinListByComId(int comId){
+		List<CompanyJobMin> list = new ArrayList<CompanyJobMin>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/company_job", "token="+TOKEN+"&where=com_id="+comId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), CompanyJobMin.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//通过公司id获取公司信息
+	public Company getCompanyById(int id) {
+		Company company=new Company();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/company_info", "token="+TOKEN+"&where=id="+id);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			company = JSON.parseObject(data.get(0).toString(),Company.class);
+			return company;
+		}
+		return null;
+	}
+	
+	//通过id获取职位详情
+	public CompanyJob getCompanyJobById(int id) {
+		CompanyJob companyJob=new CompanyJob();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/company_job", "token="+TOKEN+"&where=id="+id);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			companyJob = JSON.parseObject(data.get(0).toString(),CompanyJob.class);
+			return companyJob;
+		}
+		return null;
+	}
+	
+	//通过id获取学生信息
+	public Student getStudentById(int id) {
+		Student student=new Student();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/resume", "token="+TOKEN+"&where=uid="+id);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			student = JSON.parseObject(data.get(0).toString(),Student.class);
+			return student;
+		}
+		return null;
+	}
+	
+	//通过学生、企业id获取交友信息
+	public Friend getFriendByCSId(int comId,int stuId) {
+		Friend friend=new Friend();
+		String s=HttpRequest.sendPost(URLROOT+"api/get/friends", "token="+TOKEN+"&where=uid1="+comId+" and uid2="+stuId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			friend = JSON.parseObject(data.get(0).toString(),Friend.class);
+			return friend;
+		}
+		return null;
+	}
+	
+	//通过job中id获取投递简历列表
+	public List<JobApply> getJobGetResumeListByJobId(int jobId){
+		List<JobApply> list = new ArrayList<JobApply>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/job_apply", "token="+TOKEN+"&where=job_id="+jobId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), JobApply.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//通过job中id获取投递简历列表
+	public List<JobApply> getResumeListById(int comId){
+		List<JobApply> list = new ArrayList<JobApply>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/job_apply", "token="+TOKEN+"&where=com_id="+comId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), JobApply.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//通过学生、企业id判断是否收藏简历
+	public int isCollection(int companyId,int studentId){
+		String s=HttpRequest.sendPost(URLROOT+"api/get/favorite_resume", "token="+TOKEN+"&where=com_id="+companyId+" and uid="+ studentId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	//通过学生、企业id判断是否发送面试邀请
+	public int isSend(int jobId,int studentId){
+		String s=HttpRequest.sendPost(URLROOT+"api/get/job_interview", "token="+TOKEN+"&where=job_id="+jobId+" and uid="+ studentId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			JobInterview jobInterview = JSON.parseObject(data.get(0).toString(),JobInterview.class);
+			return jobInterview.getStatus();
+		}
+		return 5;
+	}	
+	
+	//发送面试邀请
+	public void sendInterview(JobInterview jobInterview){
+		String data = JSON.toJSONString(jobInterview);
+		HttpRequest.sendPost(URLROOT2+"api/merge/job_interview","token="+TOKEN+"&data="+data);
+	}	
+	
+	//收藏学生简历
+	public void addCollection(CompanyCollection companyCollection) {
+		String data = JSON.toJSONString(companyCollection);
+		HttpRequest.sendPost(URLROOT2+"api/merge/favorite_resume","token="+TOKEN+"&data="+data);
+	}
+
+	//取消收藏
+	public void removeCollection(int stuId,int com_id) {
+		HttpRequest.sendPost(URLROOT2+"api/delete/favorite_resume", "token="+TOKEN+"&where=uid="+stuId+" and com_id="+com_id);
+	}
+	
+	//通过id获取消息列表
+	public List<Friend> getMessageListById(int id){
+		List<Friend> list = new ArrayList<Friend>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/friends", "token="+TOKEN+"&where=uid2="+id);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), Friend.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//申请、同意好友申请
+	public void updateMessage(Friend friend) {
+		String data=JSON.toJSONString(friend);
+		HttpRequest.sendPost(URLROOT2+"api/merge/friends", "token="+TOKEN+"&data="+data);
+	}
+	
+	//删除消息
+	public void removeMessage(int friendId) {
+		HttpRequest.sendPost(URLROOT2+"api/delete/friends", "token="+TOKEN+"&id="+friendId);
+	}
+	
+	//获取公司收藏简历列表
+	public List<CompanyCollection> getComCollectionListById(int com_id){
+		List<CompanyCollection> list = new ArrayList<CompanyCollection>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/favorite_resume", "token="+TOKEN+"&where=com_id="+com_id);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), CompanyCollection.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//删除简历
+	public void removeResume(int stuId,int com_id) {
+		HttpRequest.sendPost(URLROOT2+"api/delete/job_apply", "token="+TOKEN+"&where=uid="+stuId+" and com_id="+com_id);
+	}
+	
+	//添加职位
+	public void addJob(CompanyJob companyJob) {
+		String data=JSON.toJSONString(companyJob);
+		HttpRequest.sendPost(URLROOT2+"api/merge/company_job", "token="+TOKEN+"&data="+data);
+	}
+	
+	//行业列表
+	public List<Industry> getIndustryList(){
+		List<Industry> list = new ArrayList<Industry>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/industry", "token="+TOKEN);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), Industry.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//删除工作
+	public void deleteJob(CompanyJob companyJob) {
+		HttpRequest.sendPost(URLROOT2+"api/delete/company_job", "token="+TOKEN+"&id="+companyJob.getId());
+		HttpRequest.sendPost(URLROOT2+"api/delete/favorite_job", "token="+TOKEN+"&job_id="+companyJob.getId());
+		HttpRequest.sendPost(URLROOT2+"api/delete/job_apply", "token="+TOKEN+"&job_id="+companyJob.getId());
+		HttpRequest.sendPost(URLROOT2+"api/delete/job_interview", "token="+TOKEN+"&job_id="+companyJob.getId());
+	}
+
+	//获取学生教育经历
+	public List<StudentEdu> getStudentEduListById(int studentId) {
+		List<StudentEdu> list = new ArrayList<StudentEdu>();
+		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume_edu", "token="+TOKEN+"&where=uid="+studentId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), StudentEdu.class);
+			return list;
+		}
+		return null;
+	}
+	
+	//获取学生求职期望
+	public List<StudentExp> getStudentExpListById(int studentId) {
+		List<StudentExp> list = new ArrayList<StudentExp>();
+		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume_expect", "token="+TOKEN+"&where=uid="+studentId);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), StudentExp.class);
+			return list;
+		}
+		return null;
+	}
+
+	public List<JobClass> getJobClassList() {
+		List<JobClass> list = new ArrayList<JobClass>();
+		String s=HttpRequest.sendGet(URLROOT+"api/get/job_class", "token="+TOKEN);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), JobClass.class);
+			return list;
 		}
 		return null;
 	}
@@ -212,13 +452,13 @@ public class HttpRequest {
 		return null;
 	}
 	
-	public List<Comfavorite> getComfavoriteListById(int com_id){
-		List<Comfavorite> list = new ArrayList<Comfavorite>();
+	public List<CompanyCollection> getComfavoriteListById(int com_id){
+		List<CompanyCollection> list = new ArrayList<CompanyCollection>();
 		String s=HttpRequest.sendGet(URLROOT2+"api/get/favorite_resume", "token=0e173882280f4303ba144b8b653c1c00&where=com_id="+com_id+"&fields=id,com_id,resume_id,uid,resume_name");
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
-			list = JSONArray.parseArray(data.toString(), Comfavorite.class);
+			list = JSONArray.parseArray(data.toString(), CompanyCollection.class);
 			return list;
 		}
 		return null;
@@ -260,18 +500,6 @@ public class HttpRequest {
 		return null;
 	}
 	
-	public Company getCompanyById(int id) {
-		Company company=new Company();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/company_info", "token=0e173882280f4303ba144b8b653c1c00&where=id="+id);
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			company = JSON.parseObject(data.get(0).toString(),Company.class);
-			return company;
-		}
-		return null;
-	}
-	
 	public Student getStudentByStuId(int stuId) {
 		Student student=new Student();
 		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+stuId);
@@ -296,18 +524,6 @@ public class HttpRequest {
 		return null;
 	}
 	
-	public Student getStudentById(int id) {
-		Student student=new Student();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume", "token=0e173882280f4303ba144b8b653c1c00&where=id="+id);
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			student = JSON.parseObject(data.get(0).toString(),Student.class);
-			return student;
-		}
-		return null;
-	}
-	
 	public StudentExp getStudentExpById(int stuId) {
 		StudentExp studentExp=new StudentExp();
 		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume_expect", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+stuId+"&fields=id,eid,uid,title,name,hy_name,job_name,province_name,city_name,jobstatus,type_name,report_name,open,def_job,idcard_status,status,edu,minsalary,maxsalary");
@@ -320,26 +536,17 @@ public class HttpRequest {
 		return null;
 	}
 	
-	public CompanyJob getCompanyJobById(int id) {
-		CompanyJob companyJob=new CompanyJob();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=id="+id);
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			companyJob = JSON.parseObject(data.get(0).toString(),CompanyJob.class);
-			return companyJob;
-		}
-		return null;
-	}
-	
 	public List<CompanyJob> getCompanyJobListByHyname(String hyname){
 		List<CompanyJob> list = new ArrayList<CompanyJob>();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=hy_name="+hyname);
+		String s=HttpRequest.sendGet(URLROOT+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=hy_name=\""+hyname+"\"");
+		
 		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			list = JSONArray.parseArray(data.toString(), CompanyJob.class);
-			return list;
+		if (object!=null) {
+			JSONArray data = object.getJSONArray("data");
+			if(data.size()!=0) {
+				list = JSONArray.parseArray(data.toString(), CompanyJob.class);
+				return list;
+			}
 		}
 		return null;
 	}
@@ -380,18 +587,6 @@ public class HttpRequest {
 		return null;
 	}
 	
-	public List<StudentEdu> getStudentEduListById(int stuId){
-		List<StudentEdu> list = new ArrayList<StudentEdu>();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume_edu", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+stuId+"&fields=id,uid,eid,name,starttime,endtime,college,major,edu_name");
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			list = JSONArray.parseArray(data.toString(), StudentEdu.class);
-			return list;
-		}
-		return null;
-	}
-	
 	public List<CompanyJobMin> getCompanyJobMinListById(int id){
 		List<CompanyJobMin> list = new ArrayList<CompanyJobMin>();
 		String s=HttpRequest.sendGet(URLROOT2+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=com_id="+id+"&fields=id,name,jobhits,snum,status");
@@ -406,7 +601,7 @@ public class HttpRequest {
 	
 	public List<JobExpect> getJobExpectListById(int uid){
 		List<JobExpect> list = new ArrayList<JobExpect>();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume_expect", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+uid+"&fields=id,uid,title,hy_id,hy_name,job_classid,job_classname,prvince_name,city_name,jobstatus,type_id,type_name,report,open,def_job,name,status,edu,minsalary,maxsalary");
+		String s=HttpRequest.sendGet(URLROOT2+"api/get/resume_expect", "token="+TOKEN);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data!=null && data.size()!=0) {
@@ -416,34 +611,16 @@ public class HttpRequest {
 		return null;
 	}
 	
-	public List<Friends> getFriendsListById(int id){
-		List<Friends> list = new ArrayList<Friends>();
+	public List<Friend> getFriendsListById(int id){
+		List<Friend> list = new ArrayList<Friend>();
 		String s=HttpRequest.sendPost(URLROOT2+"api/get/friends", "token=0e173882280f4303ba144b8b653c1c00&where=uid1="+id+" or uid2="+id);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
-			list = JSONArray.parseArray(data.toString(), Friends.class);
+			list = JSONArray.parseArray(data.toString(), Friend.class);
 			return list;
 		}
 		return null;
-	}
-	
-	public List<Friends> getMessageListById(int id){
-		List<Friends> list = new ArrayList<Friends>();
-		String s=HttpRequest.sendGet(URLROOT2+"api/get/friends", "token=0e173882280f4303ba144b8b653c1c00&where=uid2="+id);
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			list = JSONArray.parseArray(data.toString(), Friends.class);
-			return list;
-		}
-		return null;
-	}
-	
-	public void collectStudent(Comfavorite comfavorite) {
-    	String data = JSON.toJSONString(comfavorite);
-    	String s=HttpRequest.sendPost(URLROOT2+"api/merge/favorite_resume", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
-    	System.out.println(s);
 	}
 	
 	public void collectJob(StuFavorite stuFavorite) {
@@ -457,20 +634,20 @@ public class HttpRequest {
     	System.out.println(s);
 	}
 	
-	public void addFriends(Friends friends) {
-		String data = JSON.toJSONString(friends);
+	public void addFriends(Friend friend) {
+		String data = JSON.toJSONString(friend);
 		String s=HttpRequest.sendPost(URLROOT2+"api/merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
     	System.out.println(s);
 	}
 	
-	public void updateFriends(Friends friends) {
-		String data=JSON.toJSONString(friends);
+	public void updateFriends(Friend friend) {
+		String data=JSON.toJSONString(friend);
 		String s=HttpRequest.sendPost(URLROOT2+"api/merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
     	System.out.println(s);
 	}
 	
-	public void removeFriends(Friends friends) {
-		String data="uid1="+friends.getUid1()+" and uid2="+friends.getUid2();
+	public void removeFriends(Friend friend) {
+		String data="uid1="+friend.getUid1()+" and uid2="+friend.getUid2();
     	String s=HttpRequest.sendPost(URLROOT2+"api/delete/friends", "token=0e173882280f4303ba144b8b653c1c00&where="+data);
     	System.out.println(s);
 	}
@@ -491,12 +668,7 @@ public class HttpRequest {
 		String s=HttpRequest.sendPost(URLROOT2+"api/merge/resume_expect", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
     	System.out.println(s);
 	}
-	
-	public void addJob(CompanyJob companyJob) {
-		String data=JSON.toJSONString(companyJob);
-		String s=HttpRequest.sendPost(URLROOT2+"api/merge/company_job", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
-    	System.out.println(s);
-	}
+
 	
 	public void sendResume(JobApply jobApply) {
 		String data=JSON.toJSONString(jobApply);
@@ -509,17 +681,6 @@ public class HttpRequest {
 		String s=HttpRequest.sendPost(URLROOT2+"api/merge/company_job", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
     	System.out.println(s);
 	}
-
-	public int isSend(int jobId, int stuId) {
-		String s1 = HttpRequest.sendPost(URLROOT+"api/get/job_apply","token=0e173882280f4303ba144b8b653c1c00&where=job_id=" + jobId + " and uid="+stuId);
-		JSONObject object1 = JSONObject.parseObject(s1);
-		JSONArray data1 = object1.getJSONArray("data");
-		if (data1.size()!=0) {
-			return 1;
-		}
-		return 0;
-	}
-
 
 	
 }

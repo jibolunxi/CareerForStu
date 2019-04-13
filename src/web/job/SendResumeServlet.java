@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import domain.Admin;
 import domain.CompanyJob;
-import domain.Friends;
+import domain.Friend;
 import domain.JobApply;
 import domain.Student;
 import utils.HttpRequest;

@@ -63,16 +63,6 @@ input {
 </head>
 
 <body>
-	<script type="text/javascript">
-	function disablePageBack() {
-        //消除后退的所有动作。包括 键盘、鼠标手势等产生的后退动作。，用户登录到系统中后，浏览器回退按钮失效，只能点击退出按钮退出系统！
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
-    }
-	disablePageBack();
-	</script>
 
 
 	<section class="aui-flexView">

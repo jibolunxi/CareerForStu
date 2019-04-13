@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import domain.Admin;
 import domain.Company;
-import domain.Friends;
+import domain.Friend;
 import domain.Student;
 import utils.HttpRequest;
 
@@ -45,13 +45,13 @@ public class MessageDetailServlet extends HttpServlet {
 			session.setAttribute("company", company);
 			session.setAttribute("type", 1);
 		}
-		List<Friends> friends = httpRequest.getFriendsListById(admin.getId());
+		List<Friend> friend = httpRequest.getFriendsListById(admin.getId());
 		int isFriend = 2;
-		if (friends != null) {
-			for (int i = 0; i < friends.size(); i++) {
-				System.out.println(friends.get(i).getUid1());
-				if (friends.get(i).getUid1() == admin2.getId()) {
-					isFriend = friends.get(i).getStatus();
+		if (friend != null) {
+			for (int i = 0; i < friend.size(); i++) {
+				System.out.println(friend.get(i).getUid1());
+				if (friend.get(i).getUid1() == admin2.getId()) {
+					isFriend = friend.get(i).getStatus();
 				}
 			}
 		}

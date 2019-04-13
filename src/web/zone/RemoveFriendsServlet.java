@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
-import domain.Friends;
+import domain.Friend;
 import domain.Student;
 import utils.HttpRequest;
 
@@ -27,19 +27,19 @@ public class RemoveFriendsServlet extends HttpServlet {
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
 		Admin admin2 = (Admin) session.getAttribute("admin2");
-		Friends friend = new Friends();
+		Friend friend = new Friend();
 		friend.setUid1(admin2.getId());
 		friend.setUid2(admin.getId());
 		httpRequest.removeFriends(friend);
 		friend.setUid1(admin.getId());
 		friend.setUid2(admin2.getId());
 		httpRequest.removeFriends(friend);
-		List<Friends> friends = httpRequest.getFriendsListById(admin.getId());
+		List<Friend> friend2 = httpRequest.getFriendsListById(admin.getId());
 		int isFriend = 2;
-		if (friends != null) {
-			for (int i = 0; i < friends.size(); i++) {
-				if (friends.get(i).getUid1() == admin2.getId()||friends.get(i).getUid2() == admin2.getId()) {
-					isFriend = friends.get(i).getStatus();
+		if (friend2 != null) {
+			for (int i = 0; i < friend2.size(); i++) {
+				if (friend2.get(i).getUid1() == admin2.getId()||friend2.get(i).getUid2() == admin2.getId()) {
+					isFriend = friend2.get(i).getStatus();
 				}
 			}
 		}

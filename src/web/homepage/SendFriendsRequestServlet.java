@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.StyledDocument;
 
 import domain.Admin;
-import domain.Friends;
+import domain.Friend;
 import domain.Student;
 import utils.HttpRequest;
 
@@ -28,28 +29,23 @@ public class SendFriendsRequestServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("admin");
-
+		Student student = (Student) session.getAttribute("student");
 		HttpRequest httpRequest = new HttpRequest();
-		Admin admin2 = (Admin) session.getAttribute("admin2");
-		Friends friend = new Friends();
+
+		Friend friend = new Friend();
 		friend.setId(0);
 		friend.setUid1(admin.getId());
-		friend.setUid2(admin2.getId());
-		friend.setUname1(httpRequest.getStudentByStuId(admin.getItem_id()).getName());
-		if ("student".equals(admin2.getType())) {
-			friend.setUname2(httpRequest.getStudentByStuId(admin2.getItem_id()).getName());
-		}else if ("company".equals(admin2.getType())) {
-			friend.setUname2(httpRequest.getCompanyById(admin2.getItem_id()).getName());
-		}
+		friend.setUid2(student.getUid());
+		friend.setUname1(httpRequest.getStudentByStuId(admin.getId()).getName());
+		friend.setUname2(student.getName());
 		
 		httpRequest.addFriends(friend);
-		List<Friends> friends = httpRequest.getFriendsListById(admin.getId());
+		List<Friend> friend2 = httpRequest.getFriendsListById(admin.getId());
 		int isFriend = 2;
-		if (friends != null) {
-			for (int i = 0; i < friends.size(); i++) {
-				System.out.println(friends.get(i).getUid1());
-				if (friends.get(i).getUid2() == admin2.getId()) {
-					isFriend = friends.get(i).getStatus();
+		if (friend2 != null) {
+			for (int i = 0; i < friend2.size(); i++) {
+				if (friend2.get(i).getUid1() == student.getUid()||friend2.get(i).getUid2() ==  student.getUid()) {
+					isFriend = friend2.get(i).getStatus();
 				}
 			}
 		}
