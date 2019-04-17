@@ -57,6 +57,14 @@
 						<h4>我的消息</h4>
 					</div>
 					<div class="aui-panel-cell-fr"></div>
+				</a> <a href="interviewMessage" class="aui-panel-cell">
+					<div class="aui-panel-cell-hd">
+						<img src="images/mianshi.png" alt="">
+					</div>
+					<div class="aui-panel-cell-bd">
+						<h4>面试通知</h4>
+					</div>
+					<div class="aui-panel-cell-fr"></div>
 				</a> <a href="studentCollection" class="aui-panel-cell">
 					<div class="aui-panel-cell-hd">
 						<img src="images/mstar.png" alt="">

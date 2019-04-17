@@ -177,18 +177,6 @@ public class HttpRequest {
 		return null;
 	}
     
-    //通过admin中id获取职位列表
-	public List<CompanyJobMin> getCompanyJobMinListByComId(int comId){
-		List<CompanyJobMin> list = new ArrayList<CompanyJobMin>();
-		String s=HttpRequest.sendGet(URLROOT+"api/get/company_job", "token="+TOKEN+"&where=com_id="+comId);
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			list = JSONArray.parseArray(data.toString(), CompanyJobMin.class);
-			return list;
-		}
-		return null;
-	}
 	
 	//通过公司id获取公司信息
 	public Company getCompanyById(int id) {
@@ -279,17 +267,15 @@ public class HttpRequest {
 		return 0;
 	}
 	
-	//通过学生、企业id判断是否发送面试邀请
-	public int isSend(int jobId,int studentId){
-		String s=HttpRequest.sendPost(URLROOT+"api/get/job_interview", "token="+TOKEN+"&where=job_id="+jobId+" and uid="+ studentId);
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			JobInterview jobInterview = JSON.parseObject(data.get(0).toString(),JobInterview.class);
-			return jobInterview.getStatus();
+	public int isSend(int jobId, int stuId) {
+		String s1 = HttpRequest.sendPost(URLROOT+"api/get/job_apply","token=0e173882280f4303ba144b8b653c1c00&where=job_id=" + jobId + " and uid="+stuId);
+		JSONObject object1 = JSONObject.parseObject(s1);
+		JSONArray data1 = object1.getJSONArray("data");
+		if (data1.size()!=0) {
+			return 1;
 		}
-		return 5;
-	}	
+		return 0;
+	}
 	
 	//发送面试邀请
 	public void sendInterview(JobInterview jobInterview){
@@ -330,6 +316,17 @@ public class HttpRequest {
 	//删除消息
 	public void removeMessage(int friendId) {
 		HttpRequest.sendPost(URLROOT2+"api/delete/friends", "token="+TOKEN+"&id="+friendId);
+	}
+	
+	//更新面试邀请
+	public void updateInterview(JobInterview jobInterview) {
+		String data = JSON.toJSONString(jobInterview);
+		HttpRequest.sendPost(URLROOT2+"api/merge/job_interview","token="+TOKEN+"&data="+data);
+	}
+	
+	//删除面试邀请
+	public void deleteInterview(int jobInterviewId) {
+		HttpRequest.sendPost(URLROOT2+"api/delete/job_interview","token="+TOKEN+"&where=id="+jobInterviewId);
 	}
 	
 	//获取公司收藏简历列表
@@ -538,7 +535,23 @@ public class HttpRequest {
 	
 	public List<CompanyJob> getCompanyJobListByHyname(String hyname){
 		List<CompanyJob> list = new ArrayList<CompanyJob>();
-		String s=HttpRequest.sendGet(URLROOT+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=hy_name=\""+hyname+"\"");
+		String s=HttpRequest.sendPost(URLROOT+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=hy_name=\""+hyname+"\"");
+		
+		JSONObject object=JSONObject.parseObject(s);
+		if (object!=null) {
+			JSONArray data = object.getJSONArray("data");
+			if(data.size()!=0) {
+				list = JSONArray.parseArray(data.toString(), CompanyJob.class);
+				return list;
+			}
+		}
+		return null;
+	}
+	
+	//获取所有职位
+	public List<CompanyJob> getAllCompanyJobList(){
+		List<CompanyJob> list = new ArrayList<CompanyJob>();
+		String s=HttpRequest.sendPost(URLROOT+"api/get/company_job", "token=0e173882280f4303ba144b8b653c1c00");
 		
 		JSONObject object=JSONObject.parseObject(s);
 		if (object!=null) {
@@ -681,6 +694,31 @@ public class HttpRequest {
 		String s=HttpRequest.sendPost(URLROOT2+"api/merge/company_job", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
     	System.out.println(s);
 	}
+	
+	//面试邀请列表
+	public List<JobInterview> getInterviewList(int uid){
+		List<JobInterview> list = new ArrayList<JobInterview>();
+		String s=HttpRequest.sendPost(URLROOT+"api/get/job_interview", "token="+TOKEN+"&where=uid="+uid);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			list = JSONArray.parseArray(data.toString(), JobInterview.class);
+			return list;
+		}
+		return null;
+	}
 
+	//通过ID获取面试信息
+	public JobInterview getInterviewById(int id){
+		JobInterview interview = new JobInterview();
+		String s=HttpRequest.sendPost(URLROOT+"api/get/job_interview", "token="+TOKEN+"&where=id="+id);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			interview = JSON.parseObject(data.get(0).toString(),JobInterview.class);
+			return interview;
+		}
+		return null;
+	}
 	
 }

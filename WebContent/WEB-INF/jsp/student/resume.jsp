@@ -102,11 +102,11 @@
 					</div>
 				</a>
 				<!-- <a href="addStuEdu"><img src="images/add.png"/></a> -->
-				<div
+				<!-- <div
 					style="position: absolute; width: 100%; left: 0; right: 0; text-align: center">
 					<a href="edit" onclick="success()" id="friend"
 						style="background-color: #4CAF50; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">编辑</a>
-				</div>
+				</div> -->
 			</div>
 		</section>
 	</section>

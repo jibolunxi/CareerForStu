@@ -245,6 +245,38 @@
     <url-pattern>/addStuEdu</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AgreeInterviewServlet</servlet-name>
+    <servlet-class>web.zone.AgreeInterviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AgreeInterviewServlet</servlet-name>
+    <url-pattern>/agreeInterview</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RefuseInterviewServlet</servlet-name>
+    <servlet-class>web.zone.RefuseInterviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RefuseInterviewServlet</servlet-name>
+    <url-pattern>/refuseInterview</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>InterviewMessageServlet</servlet-name>
+    <servlet-class>web.zone.InterviewMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InterviewMessageServlet</servlet-name>
+    <url-pattern>/interviewMessage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>InterviewDetailServlet</servlet-name>
+    <servlet-class>web.zone.InterviewDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InterviewDetailServlet</servlet-name>
+    <url-pattern>/interviewDetail</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetCollegeListServlet</servlet-name>
     <servlet-class>web.homepage.GetCollegeListServlet</servlet-class>
   </servlet>

@@ -33,7 +33,7 @@
 		<section class="aui-scrollView">
 			<div class="aui-head-yellow" style="height: 10rem">
 				<div style="position: absolute; left: 1rem;">
-					<a href="${backurl}"><img src="images/icon_back_hui.png"
+					<a href="interviewMessage"><img src="images/icon_back_hui.png"
 						width=25px height=25px "/></a>
 				</div>
 				<div class="aui-head-box">
@@ -49,72 +49,39 @@
 			<div style="margin-top: 4rem; text-align: center"
 				class="friend-detail">
 
-				<p style="padding-bottom: 0.35rem">姓名：${student.name}</p>
 				<p style="padding-bottom: 0.35rem">
-					性别：
-					<c:if test="${student.sex == 0}">
-	   				男
-			</c:if>
-					<c:if test="${student.sex == 1}">
-	   				女
-			</c:if>
-					<c:if test="${student.sex == null}">
-	   				暂无
-			</c:if>
+					公司：${jobInterview.com_name}
 				</p>
 				<p style="padding-bottom: 0.35rem">
-					学校：
-					<c:if test="${student.college_name != null}">
-	   				${student.college_name}
-			</c:if>
-					<c:if test="${student.college_name == null}">
-	   				暂无
-			</c:if>
+					职位：${jobInterview.job_name}
 				</p>
 				<p style="padding-bottom: 0.35rem">
-					院系：
-					<c:if test="${student.dept_name != null}">
-	   				${student.dept_name}
-			</c:if>
-					<c:if test="${student.dept_name == null}">
-	   				暂无
-			</c:if>
+					面试时间：${jobInterview.interview_time}
 				</p>
 				<p style="padding-bottom: 0.35rem">
-					专业：
-					<c:if test="${student.major_name != null}">
-	   				${student.major_name}
-			</c:if>
-					<c:if test="${student.major_name == null}">
-	   				暂无
-			</c:if>
+					面试地点：${jobInterview.address}
 				</p>
 				<p style="padding-bottom: 0.35rem">
-					微信号：
-					<c:if test="${student.wxewm != null}">
-	   				${student.wxewm}
-			</c:if>
-					<c:if test="${student.wxewm == null}">
-	   				暂无
-			</c:if>
+					联系人：${jobInterview.linkman}
+				</p>
+				<p style="padding-bottom: 0.35rem">
+					联系方式：${jobInterview.linktel}
 				</p>
 
-				<c:if test="${isFriend == 1}">
+				<c:if test="${jobInterview.status <= 1}">
 					<p>
-						<a href="removeFriends" onclick="success()" id="friend"
-							style="background-color: #FF0000; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">删除好友</a>
+						<a href="agreeInterview?interviewId=${jobInterview.id}" onclick="success()" id="friend"
+							style="background-color: #00BB00; border: none; color: white; padding: 0.5rem 4rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">同意</a>
+					</p>
+					<p>
+						<a href="refuseInterview?interviewId=${jobInterview.id}" onclick="success()" id="friend"
+							style="background-color: #ff0000; border: none; color: white; padding: 0.5rem 4rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 0.5rem;">拒绝</a>
 					</p>
 				</c:if>
-				<c:if test="${isFriend == 0}">
+				<c:if test="${jobInterview.status == 2}">
 					<p>
 						<a id="friend"
-							style="background-color: #ffd308; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已发送请求</a>
-					</p>
-				</c:if>
-				<c:if test="${isFriend > 1}">
-					<p>
-						<a href="sendFriendsRequest" onclick="success()" id="friend"
-							style="background-color: #4CAF50; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">加为好友</a>
+							style="background-color: #00BB00; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已同意面试</a>
 					</p>
 				</c:if>
 			</div>

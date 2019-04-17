@@ -1,4 +1,4 @@
-package web.job;
+package web.zone;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,37 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
-import domain.CompanyJob;
-import domain.JobExpect;
+import domain.JobInterview;
 import utils.HttpRequest;
 
 /**
- * Servlet implementation class CompanyRecruitmentServlet
+ * Servlet implementation class RefuseInterviewServlet
  */
-@WebServlet("/JobRecommendServlet")
-public class JobRecommendServlet extends HttpServlet {
+@WebServlet("/RefuseInterviewServlet")
+public class RefuseInterviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String JOBRECOMMEND = "/WEB-INF/jsp/student/jobRecommend.jsp";
-	
+	private static final String INTERVIEWMESSAGE = "/WEB-INF/jsp/student/interviewMessage.jsp";
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
-		if (session.getAttribute("companyJobs")==null) {
-			List<JobExpect> jobExpects = httpRequest.getJobExpectListById(admin.getId());
-			if (jobExpects!=null) {
-//				List<CompanyJob> companyJobs = httpRequest.getCompanyJobListByHyname(jobExpects.get(0).getHy_name());
-				List<CompanyJob> companyJobs = httpRequest.getAllCompanyJobList();
-				session.setAttribute("companyJobs", companyJobs);
-			} else {
-				List<CompanyJob> companyJobs = httpRequest.getCompanyJobList();
-				session.setAttribute("companyJobs", companyJobs);
-			}
-		}
-		request.getRequestDispatcher(JOBRECOMMEND).forward(request, response);
+		String interviewId = request.getParameter("interviewId");
 		
+		httpRequest.deleteInterview(Integer.parseInt(interviewId));
+		List<JobInterview> jobInterviewList = httpRequest.getInterviewList(admin.getId());
+		session.setAttribute("jobInterviewList", jobInterviewList);
+		request.getRequestDispatcher(INTERVIEWMESSAGE).forward(request, response);
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

@@ -42,33 +42,35 @@
 		<section class="aui-scrollView">
 			<div class="aui-users-list">
 				<c:forEach var="companyJob" items="${companyJobs}">
-					<a href="jobRecommendDetail?companyJobId=${companyJob.id}"
-						class="aui-flex b-line">
-						<div class="aui-flex-box">
-							<h1>${companyJob.name}
-								&nbsp;
-								<c:choose>
-									<c:when test="${companyJob.jobhits<10}">
-										<span class="type_little">稀</span>
-									</c:when>
-									<c:when test="${companyJob.jobhits>9&&companyJob.jobhits<20}">
-										<span class="type_normal">普</span>
-									</c:when>
-									<c:otherwise>
-										<span class="type_fire">火</span>
-									</c:otherwise>
-								</c:choose>
-							</h1>
-							<label class="detail"><img src="images/talk.png"
-								width="20px" height="20px"><span>${companyJob.jobhits}</span></label>
-							<label class="detail"><img src="images/view.png"
-								width="20px" height="20px"><span>${companyJob.snum}</span></label>
-						</div>
-						<div class="aui-user-button" style="text-align: center">
-							<span style="display: inline-block; vertical-align: middle"><img
-								src="images/arrow.png" width="25px" height="25px"></span>
-						</div>
-					</a>
+					<c:if test="${companyJob.status==1}">
+						<a href="jobRecommendDetail?companyJobId=${companyJob.id}"
+							class="aui-flex b-line">
+							<div class="aui-flex-box">
+								<h1>${companyJob.name}
+									&nbsp;
+									<c:choose>
+										<c:when test="${companyJob.jobhits<10}">
+											<span class="type_little">稀</span>
+										</c:when>
+										<c:when test="${companyJob.jobhits>9&&companyJob.jobhits<20}">
+											<span class="type_normal">普</span>
+										</c:when>
+										<c:otherwise>
+											<span class="type_fire">火</span>
+										</c:otherwise>
+									</c:choose>
+								</h1>
+								<label class="detail"><img src="images/talk.png"
+									width="20px" height="20px"><span>${companyJob.jobhits}</span></label>
+								<label class="detail"><img src="images/view.png"
+									width="20px" height="20px"><span>${companyJob.snum}</span></label>
+							</div>
+							<div class="aui-user-button" style="text-align: center">
+								<span style="display: inline-block; vertical-align: middle"><img
+									src="images/arrow.png" width="25px" height="25px"></span>
+							</div>
+						</a>
+					</c:if>
 				</c:forEach>
 			</div>
 
