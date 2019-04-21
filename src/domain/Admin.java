@@ -2,11 +2,26 @@ package domain;
 
 public class Admin {
 	private int id;
+	private String name;
 	private boolean isLogin = false;
 	private int item_id;
+	private String mobile;
 	private String password;
 	private String type;
 	
+	
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getId() {
 		return id;
 	}

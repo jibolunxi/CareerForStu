@@ -39,41 +39,46 @@ public class StudentHomePageServlet extends HttpServlet {
 			
 			if(studentName != null && password != null && !studentName.equals("") && !password.equals("")) {
 				admin = httpRequest.getAdminByName(studentName);
-				if(admin!=null) {
-					try {
-						if (MD5.verify(password, "", admin.getPassword())) {
-							admin.setLogin(true);
-							Student student = httpRequest.getStudentByStuId(admin.getId());
-							session.setAttribute("admin", admin);
-							session.setAttribute("mystudent", student);
-							if (session.getAttribute("homepage_students")==null) {
-								List<Student> students = httpRequest.getStudentListByCollege(student.getCollege_id(), student.getDept_id());
-								session.setAttribute("homepage_students", students);
-								session.setAttribute("home_collegeId", student.getCollege_id());
-								session.setAttribute("home_collegeName", student.getCollege_name());
-								session.setAttribute("home_deptId", student.getDept_id());
-								session.setAttribute("home_deptName", student.getDept_name());
-							}
-							if (session.getAttribute("homepage_news")==null) {
-								List<News> newsList = httpRequest.getNewsListByColId(student.getCollege_id());
-								if (newsList!=null) {
-									News news = new News();
-									news = newsList.get(0);
-									news.setCtime(news.getCtime().substring(0, 10));
-									session.setAttribute("homepage_news", news);
-								}else {
-									session.setAttribute("homepage_news", null);
+				if (admin == null) {
+					admin = httpRequest.getAdminByPhone(studentName);
+				}
+				if (admin != null) {
+						try {
+							if (MD5.verify(password, "", admin.getPassword())) {
+								admin.setLogin(true);
+								Student student = httpRequest.getStudentByStuId(admin.getId());
+								session.setAttribute("admin", admin);
+								session.setAttribute("mystudent", student);
+								if (session.getAttribute("homepage_students")==null) {
+									List<Student> students = httpRequest.getStudentListByCollege(student.getCollege_id(), student.getDept_id());
+									session.setAttribute("homepage_students", students);
+									session.setAttribute("home_collegeId", student.getCollege_id());
+									session.setAttribute("home_collegeName", student.getCollege_name());
+									session.setAttribute("home_deptId", student.getDept_id());
+									session.setAttribute("home_deptName", student.getDept_name());
 								}
-								session.setAttribute("newsList", newsList);
+								if (session.getAttribute("homepage_news")==null) {
+									List<News> newsList = httpRequest.getNewsListByColId(student.getCollege_id());
+									if (newsList!=null) {
+										News news = new News();
+										news = newsList.get(0);
+										news.setCtime(news.getCtime().substring(0, 10));
+										session.setAttribute("homepage_news", news);
+									}else {
+										session.setAttribute("homepage_news", null);
+									}
+									session.setAttribute("newsList", newsList);
+								}
+								request.getRequestDispatcher(STUDENTHOMEPAGE).forward(request, response);
+							}else {
+								request.getRequestDispatcher(LOGIN).forward(request, response);
 							}
-							request.getRequestDispatcher(STUDENTHOMEPAGE).forward(request, response);
-						}else {
-							request.getRequestDispatcher(LOGIN).forward(request, response);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				}else {
+					request.getRequestDispatcher(LOGIN).forward(request, response);
 				}
 			}else {
 				request.getRequestDispatcher(LOGIN).forward(request, response);
@@ -82,5 +87,4 @@ public class StudentHomePageServlet extends HttpServlet {
 			request.getRequestDispatcher(STUDENTHOMEPAGE).forward(request, response);
 		}
 	}
-
 }

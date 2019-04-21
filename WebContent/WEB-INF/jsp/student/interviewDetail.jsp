@@ -53,10 +53,7 @@
 					公司：${jobInterview.com_name}
 				</p>
 				<p style="padding-bottom: 0.35rem">
-					职位：${jobInterview.job_name}
-				</p>
-				<p style="padding-bottom: 0.35rem">
-					面试时间：${jobInterview.interview_time}
+					面试时间：${jobInterview.intertime}
 				</p>
 				<p style="padding-bottom: 0.35rem">
 					面试地点：${jobInterview.address}
@@ -71,7 +68,7 @@
 				<c:if test="${jobInterview.status <= 1}">
 					<p>
 						<a href="agreeInterview?interviewId=${jobInterview.id}" onclick="success()" id="friend"
-							style="background-color: #00BB00; border: none; color: white; padding: 0.5rem 4rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">同意</a>
+							style="background-color: #38A45A; border: none; color: white; padding: 0.5rem 4rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">同意</a>
 					</p>
 					<p>
 						<a href="refuseInterview?interviewId=${jobInterview.id}" onclick="success()" id="friend"
@@ -81,7 +78,7 @@
 				<c:if test="${jobInterview.status == 2}">
 					<p>
 						<a id="friend"
-							style="background-color: #00BB00; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已同意面试</a>
+							style="background-color: #38A45A; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已同意面试</a>
 					</p>
 				</c:if>
 			</div>

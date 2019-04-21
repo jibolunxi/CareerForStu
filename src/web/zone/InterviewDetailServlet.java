@@ -1,7 +1,6 @@
 package web.zone;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import domain.Admin;
-import domain.Company;
-import domain.Friend;
 import domain.JobInterview;
-import domain.Student;
 import utils.HttpRequest;
 
 /**
@@ -29,12 +24,13 @@ public class InterviewDetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		Admin admin = (Admin) session.getAttribute("admin");
 
 		HttpRequest httpRequest = new HttpRequest();
 		String interviewId = request.getParameter("interviewId");
 		
 		JobInterview jobInterview = httpRequest.getInterviewById(Integer.parseInt(interviewId));
+		jobInterview.setStatus(1);
+		httpRequest.updateInterview(jobInterview);
 		
 		session.setAttribute("jobInterview", jobInterview);
 		request.getRequestDispatcher(INTERVIEWDETAIL).forward(request, response);

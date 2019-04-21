@@ -108,14 +108,14 @@
 					<c:if test="${isSend==0}">
 						<p>
 							<a href="sendResume" id="friend"
-								style="background-color: #4CAF50; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">投递简历</a>
+								style="background-color: #38A45A; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">投递简历</a>
 						</p>
 
 					</c:if>
 					<c:if test="${isSend==1}">
 						<p>
 							<a id="friend"
-								style="background-color: #FFFF00; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已投递</a>
+								style="background-color: #38A45A; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已投递</a>
 						</p>
 
 					</c:if>

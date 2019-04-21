@@ -1,6 +1,8 @@
 package utils;
 
 import java.io.IOException;
+import java.net.URL;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -49,7 +51,6 @@ public class BackFilter implements Filter {
 //		System.out.println(uri);
 //		System.out.println(req.getRequestURI());
 		if(uri.toString().contains(".css") || uri.toString().contains(".js") || uri.toString().contains(".png")|| uri.toString().contains(".do")){
-			
 			 chain.doFilter(request, response);
 		 }
 
@@ -58,7 +59,6 @@ public class BackFilter implements Filter {
 			session.setAttribute("backurl", uri);
 			chain.doFilter(request, response);
 			return;
-			
 		}else if (req.getSession().getAttribute("admin") != null) {
 //			System.out.println("2");
 			
@@ -89,71 +89,20 @@ public class BackFilter implements Filter {
 			
 			
 		}else {
-			System.out.println("3");
-			/*resp.sendRedirect(req.getContextPath() + "/companyLogin");*/
-			request.getRequestDispatcher("/WEB-INF/jsp/student/login.jsp").forward(request, response);
-            return;
-		}
-		
-		
-		
-		
-		
-		/*if(uri.equals("companyResume")&&(String)session.getAttribute("backurl")==null)
-		{
-		
-		uri=uri+"?"+"studentId="+req.getParameter("studentId");
-		System.out.println(uri);
-		session.setAttribute("backurl", uri);
-		}
-		else if (uri.equals("studentDetail")&&session.getAttribute("backurl")!=null) {
-			String temp=(String)session.getAttribute("backurl");
-			
-			session.setAttribute("tempbackurl", temp);
-		}else if (uri.equals("messageDetail")&&session.getAttribute("backurl")!=null) {
-			String temp=(String)session.getAttribute("backurl");
-			
-			session.setAttribute("tempbackurl", temp);
-		}else if(uri.equals("companyResume")&&(String)session.getAttribute("backurl")!=null){
-			uri=uri+"?"+"studentId="+req.getParameter("studentId");
-			String temp=(String)session.getAttribute("backurl");
-			if (uri.equals(temp)) {
-				session.setAttribute("backurl", null);
+			if ("toRegistration".equals(uri)) {
+				System.out.println("1");
+				chain.doFilter(request, response);
+	            return;
+			}else if ("registration".equals(uri)) {
+				System.out.println("2");
+				chain.doFilter(request, response);
+	            return;
+	        }else {
+				System.out.println("2222");
+				request.getRequestDispatcher("/WEB-INF/jsp/student/login.jsp").forward(request, response);
+	            return;
 			}
 		}
-		else if(uri.equals("myFriends")){
-			session.setAttribute("backurl", uri);
-		}else if(uri.equals("companyMessage")){
-			session.setAttribute("backurl", uri);
-		}else if(uri.equals("companyCollection")){
-			session.setAttribute("backurl", uri);
-		}else if(uri.equals("companyZone")){
-			session.setAttribute("backurl", null);
-		}else {
-			
-		}*/
-		/*if(uri.equals("companyResume"))
-		{
-		uri=uri+"?"+"studentId="+req.getParameter("studentId");
-		System.out.println(uri);
-		session.setAttribute("backurl", uri);
-		}
-		else if(uri.equals("myFriends")){
-			session.setAttribute("backurl", uri);
-		}else if(uri.equals("companyMessage")){
-			session.setAttribute("backurl", uri);
-		}else if(uri.equals("companyCollection")){
-			session.setAttribute("backurl", uri);
-		}else if(uri.equals("companyZone")){
-			session.setAttribute("backurl", null);
-		}else {
-			
-		}
-			
-		
-		// pass the request along the filter chain
-		chain.doFilter(request, response);*/
-		
 	}
 
 	/**

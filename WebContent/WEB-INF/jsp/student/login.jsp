@@ -41,16 +41,18 @@
 						<p class="aui-code-line">
 							<input type="text" class="aui-code-line-input" name="studentName"
 								value="" id="studentName" autocomplete="off"
-								placeholder="请输入账户姓名">
+								placeholder="请输入账户名或手机号">
 						</p>
 						<p class="aui-code-line aui-code-line-clear">
 							<input type="password" class="aui-code-line-input password"
 								name="password" value="" id="password" placeholder="请输入密码">
 						</p>
+						<a href="toRegistration" style="color: #E75530;font-size: 12px;display: block;margin-top: 10px;margin-right: 30px;float: right;right: 0;top: 0;">没有账号？点此注册</a>
 						<div class="aui-code-btn">
 							<button>登录</button>
 
 						</div>
+						
 					</form>
 				</div>
 

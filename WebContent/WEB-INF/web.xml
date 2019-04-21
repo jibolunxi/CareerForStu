@@ -21,6 +21,22 @@
     <url-pattern>/studentLogin</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <servlet-class>web.login.RegistrationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <url-pattern>/registration</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ToRegistrationServlet</servlet-name>
+    <servlet-class>web.login.ToRegistrationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToRegistrationServlet</servlet-name>
+    <url-pattern>/toRegistration</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>StudentHomePageServlet</servlet-name>
     <servlet-class>web.homepage.StudentHomePageServlet</servlet-class>
   </servlet>
@@ -267,6 +283,14 @@
   <servlet-mapping>
     <servlet-name>InterviewMessageServlet</servlet-name>
     <url-pattern>/interviewMessage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>web.zone.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>InterviewDetailServlet</servlet-name>

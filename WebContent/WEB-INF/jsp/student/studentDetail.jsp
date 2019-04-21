@@ -108,13 +108,13 @@
 				<c:if test="${isFriend == 0}">
 					<p>
 						<a id="friend"
-							style="background-color: #ffd308; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已发送请求</a>
+							style="background-color: #38A45A; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">已发送请求</a>
 					</p>
 				</c:if>
 				<c:if test="${isFriend > 1}">
 					<p>
 						<a href="sendFriendsRequest" onclick="success()" id="friend"
-							style="background-color: #4CAF50; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">加为好友</a>
+							style="background-color: #38A45A; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">加为好友</a>
 					</p>
 				</c:if>
 			</div>

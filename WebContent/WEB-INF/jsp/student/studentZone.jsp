@@ -82,7 +82,6 @@
 					</div>
 					<div class="aui-panel-cell-fr"></div>
 				</a>
-				<div class="divHeight"></div>
 				<a href="myResume" class="aui-panel-cell">
 					<div class="aui-panel-cell-hd">
 						<img src="images/icon_3333.png" alt="">
@@ -91,6 +90,12 @@
 						<h4>我的简历</h4>
 					</div>
 					<div class="aui-panel-cell-fr"></div>
+				</a>
+				<div class="divHeight"></div>
+				<a href="logout" class="aui-panel-cell">
+					<div class="aui-panel-cell-bd"  style="text-align: center;">
+						<h4>退出登录</h4>
+					</div>
 				</a>
 			</div>
 		</section>

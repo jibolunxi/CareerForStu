@@ -10,7 +10,7 @@ public class JobInterview {
 	private String send_time;
 	private int status;
 	private String address;
-	private String interview_time;
+	private String intertime;
 	private String linkman;
 	private String linktel;
 	private int job_id;
@@ -71,11 +71,11 @@ public class JobInterview {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getInterview_time() {
-		return interview_time;
+	public String getIntertime() {
+		return intertime;
 	}
-	public void setInterview_time(String interview_time) {
-		this.interview_time = interview_time;
+	public void setIntertime(String intertime) {
+		this.intertime = intertime;
 	}
 	public String getLinkman() {
 		return linkman;

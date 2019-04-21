@@ -12,14 +12,27 @@ public class Student {
 	private String college_name;
 	private int dept_id;
 	private String dept_name;
+	private int major_id;
 	private String major_name;
+	private int edu_id;
 	private String edu;
 	private String description;
 	private String resume_photo;
 	private String qq;
 	private String wxewm;
 	
-	
+	public int getMajor_id() {
+		return major_id;
+	}
+	public void setMajor_id(int major_id) {
+		this.major_id = major_id;
+	}
+	public int getEdu_id() {
+		return edu_id;
+	}
+	public void setEdu_id(int edu_id) {
+		this.edu_id = edu_id;
+	}
 	public int getId() {
 		return id;
 	}

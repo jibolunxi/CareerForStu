@@ -53,11 +53,9 @@
 								<!--用cif-->
 							</div>
 							<div class="aui-flex-box">
-								<h2>${jobInterview.job_name}(未读)</h2>
+								<h2>${jobInterview.com_name}(未读)</h2>
 								<p
 									style="font-size: small; position: absolute; right: 1rem; top: 1.45rem;">${jobInterview.send_time}</p>
-								<p>${jobInterview.com_name}</p>
-								<!--这里最好返回的是一个限制长度的，超出长度最好用....-->
 
 							</div>
 							<div class="aui-user-button" style="text-align: center"></div>
@@ -68,16 +66,13 @@
 							class="aui-flex b-line">
 							<div class="aui-flex-user">
 								<img src="images/user.jpg" alt=""
-									style="border-radius: 0; border: none"> <span
-									class="miss-message"></span>
+									style="border-radius: 0; border: none"> 
 								<!--用cif-->
 							</div>
 							<div class="aui-flex-box">
-								<h2>${jobInterview.job_name}(已读)</h2>
+								<h2>${jobInterview.com_name}(已读)</h2>
 								<p
 									style="font-size: small; position: absolute; right: 1rem; top: 1.45rem;">${jobInterview.send_time}</p>
-								<p>${jobInterview.com_name}</p>
-								<!--这里最好返回的是一个限制长度的，超出长度最好用....-->
 
 							</div>
 							<div class="aui-user-button" style="text-align: center"></div>
@@ -88,17 +83,13 @@
 							class="aui-flex b-line">
 							<div class="aui-flex-user">
 								<img src="images/user.jpg" alt=""
-									style="border-radius: 0; border: none"> <span
-									class="miss-message"></span>
+									style="border-radius: 0; border: none">
 								<!--用cif-->
 							</div>
 							<div class="aui-flex-box">
-								<h2>${jobInterview.job_name}(已同意)</h2>
+								<h2>${jobInterview.com_name}(已同意)</h2>
 								<p
 									style="font-size: small; position: absolute; right: 1rem; top: 1.45rem;">${jobInterview.send_time}</p>
-								<p>${jobInterview.com_name}</p>
-								<!--这里最好返回的是一个限制长度的，超出长度最好用....-->
-
 							</div>
 							<div class="aui-user-button" style="text-align: center"></div>
 						</a>
