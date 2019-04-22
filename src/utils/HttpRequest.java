@@ -179,6 +179,17 @@ public class HttpRequest {
 		return null;
 	}
     
+    public Admin getAdminByPhone(String phonenumber) {
+		Admin admin=new Admin();
+		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token=0e173882280f4303ba144b8b653c1c00&where=mobile="+phonenumber);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			admin = JSON.parseObject(data.get(0).toString(),Admin.class);
+			return admin;
+		}
+		return null;
+	}    
 	
 	//通过公司id获取公司信息
 	public Company getCompanyById(int id) {
@@ -444,18 +455,7 @@ public class HttpRequest {
 		}
 		return null;
 	}
-    
-    public Admin getAdminByPhone(String phonenumber) {
-		Admin admin=new Admin();
-		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token=0e173882280f4303ba144b8b653c1c00&where=mobile="+phonenumber+"&fields=id,item_id,password,type");
-		JSONObject object=JSONObject.parseObject(s);
-		JSONArray data = object.getJSONArray("data");
-		if(data.size()!=0) {
-			admin = JSON.parseObject(data.get(0).toString(),Admin.class);
-			return admin;
-		}
-		return null;
-	}
+   
     
 
 	public Admin getAdminByItemId(int id) {

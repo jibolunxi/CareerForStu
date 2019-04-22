@@ -47,6 +47,7 @@
 							<input type="password" class="aui-code-line-input password"
 								name="password" value="" id="password" placeholder="请输入密码">
 						</p>
+						<font style="color: #E75530;font-size: 12px;display: block;margin-top: 10px;margin-left: 30px;float: left;right: 0;top: 0;"> ${sessionScope.isRight}</font>
 						<a href="toRegistration" style="color: #E75530;font-size: 12px;display: block;margin-top: 10px;margin-right: 30px;float: right;right: 0;top: 0;">没有账号？点此注册</a>
 						<div class="aui-code-btn">
 							<button>登录</button>

@@ -2,6 +2,7 @@ package web.homepage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,11 +41,13 @@ public class StudentHomePageServlet extends HttpServlet {
 			if(studentName != null && password != null && !studentName.equals("") && !password.equals("")) {
 				admin = httpRequest.getAdminByName(studentName);
 				if (admin == null) {
-					admin = httpRequest.getAdminByPhone(studentName);
+					if (isInteger(studentName)) {
+						admin = httpRequest.getAdminByPhone(studentName);
+					}
 				}
 				if (admin != null) {
 						try {
-							if (MD5.verify(password, "", admin.getPassword())) {
+							if ("student".equals(admin.getType())&&MD5.verify(password, "", admin.getPassword())) {
 								admin.setLogin(true);
 								Student student = httpRequest.getStudentByStuId(admin.getId());
 								session.setAttribute("admin", admin);
@@ -71,20 +74,30 @@ public class StudentHomePageServlet extends HttpServlet {
 								}
 								request.getRequestDispatcher(STUDENTHOMEPAGE).forward(request, response);
 							}else {
+								session.setAttribute("isRight", "账号和密码不匹配");
 								request.getRequestDispatcher(LOGIN).forward(request, response);
 							}
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+							session.setAttribute("isRight", "账号和密码不匹配");
+							request.getRequestDispatcher(LOGIN).forward(request, response);
 						}
 				}else {
+					session.setAttribute("isRight", "用户不存在");
 					request.getRequestDispatcher(LOGIN).forward(request, response);
 				}
 			}else {
+				session.setAttribute("isRight", "账号或密码不能为空");
 				request.getRequestDispatcher(LOGIN).forward(request, response);
 			}
 		}else {
 			request.getRequestDispatcher(STUDENTHOMEPAGE).forward(request, response);
 		}
+	}
+	
+	public static boolean isInteger(String str) {
+		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+		return pattern.matcher(str).matches();
 	}
 }
