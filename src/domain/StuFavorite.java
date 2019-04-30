@@ -8,7 +8,7 @@ public class StuFavorite {
 	private String create_time;
 	private int job_id;
 	private String job_name;
-	
+	private String company_logo;
 	
 	public int getId() {
 		return id;
@@ -51,6 +51,12 @@ public class StuFavorite {
 	}
 	public void setCreate_time(String create_time) {
 		this.create_time = create_time;
+	}
+	public String getCompany_logo() {
+		return company_logo;
+	}
+	public void setCompany_logo(String company_logo) {
+		this.company_logo = company_logo;
 	}
 	
 }

@@ -36,14 +36,14 @@
 					onclick="jump_back()"></div>
 				<div class="aui-head-box">
 					<div class="aui-head-user">
-						<img src="images/user.jpg" alt="">
+						<img src="${mystudent.resume_photo}" alt="">
 					</div>
 
 				</div>
 				<div style="text-align: center">
-					<p style="display: inline-block; vertical-align: middle">
-						<img src="images/icon_girl.png" style="width: 25px; height: 25px">${mystudent.name}<img
-							src="images/icon_iPhone.png" style="width: 25px; height: 25px">${mystudent.telphone}</p>
+					<p style="display: inline-block; vertical-align: middle"></p>
+						<p>${mystudent.name}</p>
+						<p>${mystudent.telphone}</p>
 					<p>${mystudent.college_name}&nbsp; ${mystudent.major_name}</p>
 				</div>
 

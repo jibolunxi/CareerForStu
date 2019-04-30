@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
+import domain.JobApply;
 import domain.News;
 import domain.Student;
 import utils.HttpRequest;
@@ -50,10 +51,22 @@ public class StudentHomePageServlet extends HttpServlet {
 							if ("student".equals(admin.getType())&&MD5.verify(password, "", admin.getPassword())) {
 								admin.setLogin(true);
 								Student student = httpRequest.getStudentByStuId(admin.getId());
+								if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+									student.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+								}else {
+									student.setResume_photo("images/student.png");
+								}
 								session.setAttribute("admin", admin);
 								session.setAttribute("mystudent", student);
 								if (session.getAttribute("homepage_students")==null) {
 									List<Student> students = httpRequest.getStudentListByCollege(student.getCollege_id(), student.getDept_id());
+									for(Student student1: students) {
+										  if (student1.getResume_photo()!=null&&!student1.getResume_photo().equals("")) {
+											  	student1.setResume_photo("http://47.96.70.17/career/"+student1.getResume_photo());
+											}else {
+												student1.setResume_photo("images/student.png");
+											}
+									}
 									session.setAttribute("homepage_students", students);
 									session.setAttribute("home_collegeId", student.getCollege_id());
 									session.setAttribute("home_collegeName", student.getCollege_name());

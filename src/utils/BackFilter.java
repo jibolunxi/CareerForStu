@@ -93,6 +93,10 @@ public class BackFilter implements Filter {
 				System.out.println("1");
 				chain.doFilter(request, response);
 	            return;
+			}else if ("isOrigine".equals(uri)) {
+				System.out.println("1");
+				chain.doFilter(request, response);
+	            return;
 			}else if ("registration".equals(uri)) {
 				System.out.println("2");
 				chain.doFilter(request, response);

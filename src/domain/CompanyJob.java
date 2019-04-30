@@ -1,5 +1,7 @@
 package domain;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single;
+
 public class CompanyJob {
 	private int id;
 	private int uid;
@@ -63,6 +65,7 @@ public class CompanyJob {
 	private String link_tel;
 	private String link_mobile;
 	private String link_email;
+	private String logo;
 	public int getId() {
 		return id;
 	}
@@ -434,6 +437,12 @@ public class CompanyJob {
 	}
 	public void setLink_email(String link_email) {
 		this.link_email = link_email;
+	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 	
 	

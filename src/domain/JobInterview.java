@@ -17,6 +17,7 @@ public class JobInterview {
 	private String job_name;
 	private int apply_id;
 	private String refuse_reason;
+	private String company_logo;
 	public int getId() {
 		return id;
 	}
@@ -112,5 +113,11 @@ public class JobInterview {
 	}
 	public void setRefuse_reason(String refuse_reason) {
 		this.refuse_reason = refuse_reason;
+	}
+	public String getCompany_logo() {
+		return company_logo;
+	}
+	public void setCompany_logo(String company_logo) {
+		this.company_logo = company_logo;
 	}
 }

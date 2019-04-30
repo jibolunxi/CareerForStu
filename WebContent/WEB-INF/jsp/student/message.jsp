@@ -47,7 +47,7 @@
 						<a href="messageDetail?stuId=${friend.uid1}&friendId=${friend.id}"
 							class="aui-flex b-line">
 							<div class="aui-flex-user">
-								<img src="images/user.jpg" alt=""
+								<img src="${friend.resume_photo}" alt=""
 									style="border-radius: 0; border: none"> <span
 									class="miss-message"></span>
 								<!--用cif-->

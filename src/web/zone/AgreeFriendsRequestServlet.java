@@ -30,11 +30,11 @@ public class AgreeFriendsRequestServlet extends HttpServlet {
 		HttpRequest httpRequest = new HttpRequest();
 		
 		Admin admin = (Admin) session.getAttribute("admin");
-		Admin admin2 = (Admin) session.getAttribute("admin2");
+		Student student = (Student) session.getAttribute("student");
 		
 		Friend friend = new Friend();
 		friend.setId(Integer.parseInt((String) session.getAttribute("friendId")));
-		friend.setUid1(admin2.getId());
+		friend.setUid1(student.getUid());
 		friend.setUid2(admin.getId());
 		friend.setStatus(1);
 		httpRequest.updateFriends(friend);
@@ -42,7 +42,7 @@ public class AgreeFriendsRequestServlet extends HttpServlet {
 		int isFriend = 2;
 		if (friend2 != null) {
 			for (int i = 0; i < friend2.size(); i++) {
-				if (httpRequest.getAdminById(friend2.get(i).getUid1()).getItem_id() == admin2.getItem_id()) {
+				if (httpRequest.getAdminById(friend2.get(i).getUid1()).getItem_id() == student.getUid()) {
 					isFriend = friend2.get(i).getStatus();
 				}
 			}

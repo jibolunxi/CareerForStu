@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
+import domain.Company;
 import domain.CompanyCollection;
+import domain.JobInterview;
 import domain.StuFavorite;
 import utils.HttpRequest;
 
@@ -29,6 +31,16 @@ public class StudentCollectionServlet extends HttpServlet {
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
 		List<StuFavorite> stuFavorites = httpRequest.getStuFavoriteListById(admin.getId());
+		if (stuFavorites != null) {
+			for(StuFavorite stuFavorite : stuFavorites) {
+				Company company = httpRequest.getCompanyById(stuFavorite.getCom_id());
+				if (company.getLogo()!=null&&!company.getLogo().equals("")) {
+					stuFavorite.setCompany_logo("http://47.96.70.17/career/"+company.getLogo());
+				}else {
+					stuFavorite.setCompany_logo("images/company.png");
+				}
+			}
+		}
 		session.setAttribute("stuFavorites", stuFavorites);
 		request.getRequestDispatcher(COLLECTION).forward(request, response);
 	}

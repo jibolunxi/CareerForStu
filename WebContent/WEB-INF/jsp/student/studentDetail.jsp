@@ -38,7 +38,7 @@
 				</div>
 				<div class="aui-head-box">
 					<div class="aui-head-user">
-						<img src="images/user.jpg" alt=""
+						<img src="${student.resume_photo}" alt=""
 							style="position: fixed; top: 7rem; width: 5.8rem; height: 5.8rem;" />
 					</div>
 

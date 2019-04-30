@@ -31,6 +31,11 @@ public class CompanyDetailServlet extends HttpServlet {
 		Company company = new Company();
 		
 		company = httpRequest.getCompanyById(Integer.parseInt(companyId));
+		if (company.getLogo()!=null&&!company.getLogo().equals("")) {
+			company.setLogo("http://47.96.70.17/career/"+company.getLogo());
+		}else {
+			company.setLogo("images/company.png");
+		}
 		session.setAttribute("company", company);
 		request.getRequestDispatcher(COMPANYDETAIL).forward(request, response);
 	}

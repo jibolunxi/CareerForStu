@@ -125,7 +125,7 @@
 					<a href="studentDetail?studentId=${homepage_student.uid}"
 						class="aui-flex b-line">
 						<div class="aui-flex-user">
-							<img src="images/user.jpg" alt="">
+							<img src="${homepage_student.resume_photo}" alt="">
 						</div>
 						<div class="aui-flex-box">
 							<h2>${homepage_student.name}</h2>

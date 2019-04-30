@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
+import domain.Company;
 import domain.Friend;
 import domain.JobInterview;
+import domain.Student;
 import utils.HttpRequest;
 
 /**
@@ -29,6 +31,17 @@ public class InterviewMessageServlet extends HttpServlet {
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
 		List<JobInterview> jobInterviewList = httpRequest.getInterviewList(admin.getId());
+		
+		if (jobInterviewList != null) {
+			for(JobInterview jobInterview : jobInterviewList) {
+				  Company company = httpRequest.getCompanyById(jobInterview.getCom_id());
+				  if (company.getLogo()!=null&&!company.getLogo().equals("")) {
+					  	jobInterview.setCompany_logo("http://47.96.70.17/career/"+company.getLogo());
+					}else {
+						jobInterview.setCompany_logo("images/company.png");
+				  }
+			}
+		}
 		session.setAttribute("jobInterviewList", jobInterviewList);
 		request.getRequestDispatcher(INTERVIEWMESSAGE).forward(request, response);
 	}

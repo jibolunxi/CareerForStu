@@ -64,11 +64,11 @@
 							width="20px" height="20px"><span>${companyJob.city_name}·${companyJob.three_cityname}</span></label>
 						<label class="detail"><img src="images/degree2.png"
 							width="20px" height="20px"><span>${companyJob.edu_name}</span></label>
-						<label class="detail"><img src="images/work.png"
-							width="20px" height="20px"><span>1-3年</span></label>
+<%-- 						<label class="detail"><img src="images/work.png"
+							width="20px" height="20px"><span>${companyJob.exp_name}</span></label> --%>
 					</div>
 					<div class="aui-user-button" style="text-align: center"></div>
-				</a> <a href="companyDetail?companyId=${companyJob.uid}"
+				</a> <a href="companyDetail?companyId=${companyJob.com_id}"
 					class="aui-flex b-line">
 					<!--姓名和照片-->
 
@@ -76,7 +76,7 @@
 						<h1>${companyJob.com_name}</h1>
 					</div>
 					<div class="aui-flex-user">
-						<img src="images/user.jpg" alt="">
+						<img src="${companyJob.logo}" alt="">
 					</div>
 				</a> <a href="#" class="aui-flex b-line">
 					<div class="aui-flex-box">

@@ -11,6 +11,8 @@ public class Friend {
 	private String create_time;
 	private String delete_time;
 	private String msg;
+	private String resume_photo;
+	
 	public int getId() {
 		return id;
 	}
@@ -71,6 +73,12 @@ public class Friend {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public String getResume_photo() {
+		return resume_photo;
+	}
+	public void setResume_photo(String resume_photo) {
+		this.resume_photo = resume_photo;
 	}
 
 }

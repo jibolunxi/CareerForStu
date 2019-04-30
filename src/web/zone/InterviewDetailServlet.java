@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import domain.Company;
 import domain.JobInterview;
 import utils.HttpRequest;
 
@@ -29,9 +30,12 @@ public class InterviewDetailServlet extends HttpServlet {
 		String interviewId = request.getParameter("interviewId");
 		
 		JobInterview jobInterview = httpRequest.getInterviewById(Integer.parseInt(interviewId));
-		jobInterview.setStatus(1);
-		httpRequest.updateInterview(jobInterview);
-		
+		Company company = httpRequest.getCompanyById(jobInterview.getCom_id());
+		if (company.getLogo()!=null&&!company.getLogo().equals("")) {
+			jobInterview.setCompany_logo("http://47.96.70.17/career/"+company.getLogo());
+		}else {
+			jobInterview.setCompany_logo("images/company.png");
+		}
 		session.setAttribute("jobInterview", jobInterview);
 		request.getRequestDispatcher(INTERVIEWDETAIL).forward(request, response);
 

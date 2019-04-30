@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
+import domain.Company;
 import domain.CompanyJob;
 import domain.StuFavorite;
 import utils.HttpRequest;
@@ -54,7 +55,12 @@ public class CollectionDetailServlet extends HttpServlet {
 			}
 			
 			int isSend = httpRequest.isSend(jobId,admin.getId());
-			
+			Company company = httpRequest.getCompanyById(companyJob.getCom_id());
+			if (company.getLogo()!=null&&!company.getLogo().equals("")) {
+				companyJob.setLogo("http://47.96.70.17/career/"+company.getLogo());
+			}else {
+				companyJob.setLogo("images/company.png");
+			}
 			session.setAttribute("isSend", isSend);
 			session.setAttribute("companyJob", companyJob);
 			request.getRequestDispatcher(COLLECTJOB).forward(request, response);

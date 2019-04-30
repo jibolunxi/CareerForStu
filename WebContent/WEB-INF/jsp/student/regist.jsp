@@ -356,7 +356,7 @@ input {
 		disablePageBack();
 	</script>
 	<script type="text/javascript">
-$(function () {
+		$(function () {
             
             var curr = new Date().getFullYear();
             var opt = {
@@ -385,7 +385,103 @@ $(function () {
         });
 
 	</script>
+	<script type="text/javascript">
+        var xmlHttpRequest;
+        function createXMLHttpRequest()
+        {
 
+            if (window.XMLHttpRequest) //非IE浏览器
+            {
+                xmlHttpRequest = new XMLHttpRequest();
+            }
+            else if (window.ActiveObject)//IE6以上浏览器
+            {
+                xmlHttpRequest = new ActiveObject("Msxml2.XMLHTTP");
+            }
+            else //IE6及以下浏览器
+            {
+                xmlHttpRequest = new ActiveObject("Microsoft.XMLHTTP");
+            }
+        }
+
+        function isRegist()
+        {
+            var name = document.userInfo.name.value;
+            var number = document.userInfo.number.value;
+            var div1 = document.getElementById("isOrigine");
+            if(name==""||number=="")
+            {
+                div1.innerHTML="<font style='color: #E75530;font-size: 12px;margin-left: 10px;'>姓名和学号不能为空</font>";
+            }
+            else
+            {
+                sendRequest("isOrigine?name="+name+"&number="+number);
+                
+            }
+        }
+
+        function sendRequest(url){
+            createXMLHttpRequest();
+            xmlHttpRequest.open("GET", url, true);
+            xmlHttpRequest.onreadystatechange = processResponse;
+            xmlHttpRequest.send(null);
+        }
+
+        function processResponse()
+        {
+
+            if(xmlHttpRequest.readyState == 4)
+            {
+
+                if(xmlHttpRequest.status == 200)
+                {
+                    var responseInfo = xmlHttpRequest.responseXML.getElementsByTagName("msg")[0].firstChild.nodeValue;
+                    var div1 = document.getElementById("isOrigine");
+                    if(responseInfo == "NotExist"){
+                        div1.innerHTML="<font style='color: #E75530;font-size: 12px;margin-left: 10px;'>学号信息不存在，请联系管理员加入</font>";
+                    }else if(responseInfo == "Registed"){
+                        div1.innerHTML="<font style='color: #E75530;font-size: 12px;margin-left: 10px;'>该学号已注册</font>";
+                    }else if(responseInfo == "Wrong"){
+                        div1.innerHTML="<font style='color: #E75530;font-size: 12px;margin-left: 10px;'>姓名与学号不匹配</font>";
+                    }else if(responseInfo == "True"){
+                        div1.innerHTML="<font style='color: #38A45A;font-size: 12px;margin-left: 10px;'>输入正确</font>";
+                    }else{
+                        div1.innerHTML="<font style='color: #E75530;font-size: 12px;margin-left: 10px;'>输入有误,请核对信息</font>";
+                    }
+                }
+            }
+        }
+
+        function isNull()
+        {
+            var password = document.userInfo.password.value;
+            var div2 = document.getElementById("passwordInfo");
+            if(password=="")
+            {
+                div2.innerHTML="<font color='red'>The username and password may not be empty</font>";
+            }
+            else
+            {
+                div2.innerHTML="<font color='red'></font>";
+            }
+        }
+
+        function isSame()
+        {
+            var password = document.userInfo.password.value;
+            var password2=document.userInfo.repeatedPassword.value;
+            var div3 = document.getElementById("password2");
+            if(password!=password2)
+            {
+                div3.innerHTML="<font color='red'>The password you entered two times are different</font>";
+            }
+            else
+            {
+                div3.innerHTML="<font color='red'></font>";
+            }
+        }
+
+    </script>
 
 	<section class="aui-flexView">
 		<header class="aui-navBar aui-navBar-fixed b-line">
@@ -401,29 +497,32 @@ $(function () {
 			</a>
 		</header>
 		<section class="aui-scrollView">
-			<form action="registration" method="GET">
+			<form action="registration" method="GET" name="userInfo" id="userInfo">
 				<div class="aui-users-list">
+					 <a href="#" class="aui-flex b-line">
+
+						<div class="aui-flex-box">
+
+							<div id="demo_default" class="demos">
+								<input type="text" name="number" id="number" class="test_default input"
+									style="box-shadow: none; mso-border-shadow: no"/>
+							</div>
+							<h2>学号<text style="color: red">*</text></h2>
+						</div>
+					</a> 
 					<a href="#" class="aui-flex b-line">
 
 						<div class="aui-flex-box">
 							<div id="demo_default" class="demos">
-								<input type="text" name="name" class="test_default input"
+								<input type="text" name="name" id="name" class="test_default input"
 									style="box-shadow: none; mso-border-shadow: no"
-									value="" />
+									value="" oninput="isRegist()"/>
 							</div>
 							<h2>真实姓名<text style="color: red">*</text></h2>
 						</div>
-					</a> <a href="#" class="aui-flex b-line">
-
-						<div class="aui-flex-box">
-
-							<div id="demo_default" class="demos">
-								<input type="text" name="number" class="test_default input"
-									style="box-shadow: none; mso-border-shadow: no" />
-							</div>
-							<h2>学号<text style="color: red">*</text></h2>
-						</div>
-					</a> <a href="#" class="aui-flex b-line">
+					</a>
+					<div id="isOrigine"></div>
+					<a href="#" class="aui-flex b-line">
 
 						<div class="aui-flex-box">
 
@@ -479,7 +578,7 @@ $(function () {
 							<h2>确认密码<text style="color: red">*</text></h2>
 						</div>
 					</a> 
-
+				<font style="color: #E75530;font-size: 12px;display: block;margin-top: 10px;margin-left: 30px;float: left;right: 0;top: 0;"> ${sessionScope.regist}</font>
 				</div>
 				<input type="text" id="xinzi1" name="xinzi1" style="display: none">
 				<input type="text" id="xinzi2" name="xinzi2" style="display: none">

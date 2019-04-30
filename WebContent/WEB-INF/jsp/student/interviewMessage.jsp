@@ -47,7 +47,7 @@
 						<a href="interviewDetail?interviewId=${jobInterview.id}"
 							class="aui-flex b-line">
 							<div class="aui-flex-user">
-								<img src="images/user.jpg" alt=""
+								<img src="${jobInterview.company_logo}" alt=""
 									style="border-radius: 0; border: none"> <span
 									class="miss-message"></span>
 								<!--用cif-->
@@ -65,8 +65,9 @@
 						<a href="interviewDetail?interviewId=${jobInterview.id}"
 							class="aui-flex b-line">
 							<div class="aui-flex-user">
-								<img src="images/user.jpg" alt=""
-									style="border-radius: 0; border: none"> 
+								<img src="${jobInterview.company_logo}" alt=""
+									style="border-radius: 0; border: none"> <span
+									class="miss-message"></span>
 								<!--用cif-->
 							</div>
 							<div class="aui-flex-box">
@@ -82,8 +83,9 @@
 						<a href="interviewDetail?interviewId=${jobInterview.id}"
 							class="aui-flex b-line">
 							<div class="aui-flex-user">
-								<img src="images/user.jpg" alt=""
-									style="border-radius: 0; border: none">
+								<img src="${jobInterview.company_logo}" alt=""
+									style="border-radius: 0; border: none"> <span
+									class="miss-message"></span>
 								<!--用cif-->
 							</div>
 							<div class="aui-flex-box">

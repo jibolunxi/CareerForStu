@@ -49,7 +49,7 @@
 							<a href="studentDetail?stuId=${friend.uid1}"
 								class="aui-flex b-line">
 								<div class="aui-flex-user">
-									<img src="images/user.jpg" alt="">
+									<img src="${friend.resume_photo}" alt="">
 								</div>
 								<div class="aui-flex-box">
 									<h2>${friend.uname1}</h2>
@@ -61,7 +61,7 @@
 							<a href="studentDetail?stuId=${friend.uid2}"
 								class="aui-flex b-line">
 								<div class="aui-flex-user">
-									<img src="images/user.jpg" alt="">
+									<img src="${friend.resume_photo}" alt="">
 								</div>
 								<div class="aui-flex-box">
 									<h2>${friend.uname2}</h2>

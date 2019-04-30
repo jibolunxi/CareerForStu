@@ -44,7 +44,8 @@
 					<a href="collectionDetail?jobId=${stufavorite.job_id}"
 						class="aui-flex b-line">
 						<div class="aui-flex-user">
-							<img src="images/user.jpg" alt="">
+							<img src="${stufavorite.company_logo}" alt=""
+									style="border-radius: 0; border: none"/>
 						</div>
 						<div class="aui-flex-box">
 							<h2>${stufavorite.job_name}</h2>

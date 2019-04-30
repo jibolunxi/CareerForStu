@@ -35,11 +35,26 @@ public class StudentDetailServlet extends HttpServlet {
 		Student student = new Student();
 		if (stuId != null) {
 			student = httpRequest.getStudentByStuId(Integer.parseInt(stuId));
+			if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+				student.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+			}else {
+				student.setResume_photo("images/student.png");
+			}
 			session.setAttribute("student", student);
 		} else if(studentId != null) {
 			student = httpRequest.getStudentByStuId(Integer.parseInt(studentId));
+			if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+				student.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+			}else {
+				student.setResume_photo("images/student.png");
+			}
 			session.setAttribute("student", student);
 		}else {
+			if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+				student.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+			}else {
+				student.setResume_photo("images/student.png");
+			}
 			student = (Student) session.getAttribute("student");
 		}
 

@@ -21,6 +21,14 @@
     <url-pattern>/studentLogin</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>IsOrigineServlet</servlet-name>
+    <servlet-class>web.login.IsOrigineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IsOrigineServlet</servlet-name>
+    <url-pattern>/isOrigine</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>RegistrationServlet</servlet-name>
     <servlet-class>web.login.RegistrationServlet</servlet-class>
   </servlet>
@@ -28,7 +36,7 @@
     <servlet-name>RegistrationServlet</servlet-name>
     <url-pattern>/registration</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>ToRegistrationServlet</servlet-name>
     <servlet-class>web.login.ToRegistrationServlet</servlet-class>
   </servlet>

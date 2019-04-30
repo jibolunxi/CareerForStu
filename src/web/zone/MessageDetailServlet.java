@@ -33,29 +33,25 @@ public class MessageDetailServlet extends HttpServlet {
 		HttpRequest httpRequest = new HttpRequest();
 		String stuId = request.getParameter("stuId");
 		String friendId = request.getParameter("friendId");
-		Admin admin2 = httpRequest.getAdminById(Integer.parseInt(stuId));
-		Student student = new Student();
-		Company company = new Company();
-		if ("student".equals(admin2.getType())) {
-			student = httpRequest.getStudentByStuId(admin2.getItem_id());
-			session.setAttribute("student", student);
-			session.setAttribute("type", 0);
-		}else if ("company".equals(admin2.getType())) {
-			company = httpRequest.getCompanyById(admin2.getItem_id());
-			session.setAttribute("company", company);
-			session.setAttribute("type", 1);
-		}
+
+		Student student = httpRequest.getStudentByStuId(Integer.parseInt(stuId));
+		session.setAttribute("student", student);
+
 		List<Friend> friend = httpRequest.getFriendsListById(admin.getId());
 		int isFriend = 2;
 		if (friend != null) {
 			for (int i = 0; i < friend.size(); i++) {
 				System.out.println(friend.get(i).getUid1());
-				if (friend.get(i).getUid1() == admin2.getId()) {
+				if (friend.get(i).getUid1() == Integer.parseInt(stuId)) {
 					isFriend = friend.get(i).getStatus();
 				}
 			}
 		}
-		session.setAttribute("admin2", admin2);
+		if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+			student.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+		}else {
+			student.setResume_photo("images/student.png");
+	  }
 		session.setAttribute("friendId", friendId);
 		session.setAttribute("student", student);
 		session.setAttribute("isFriend", isFriend);

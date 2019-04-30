@@ -43,8 +43,8 @@ public class HttpRequest {
      *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果
      */
-//	private static String URLROOT = "http://47.96.70.17/career/api/";
-	private static String URLROOT = "http://47.96.70.17/career/service/";
+	private static String URLROOT = "http://47.96.70.17/career/api/";
+//	private static String URLROOT = "http://47.96.70.17/career/service/";
 //	private static String URLROOT = "http://47.254.22.209:8080/careerdev/api/";
 	private static String TOKEN = "0e173882280f4303ba144b8b653c1c00";
 	
@@ -181,7 +181,7 @@ public class HttpRequest {
     
     public Admin getAdminByPhone(String phonenumber) {
 		Admin admin=new Admin();
-		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token=0e173882280f4303ba144b8b653c1c00&where=mobile="+phonenumber);
+		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token="+TOKEN+"&where=mobile="+phonenumber);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -312,7 +312,7 @@ public class HttpRequest {
 	}
 	
 	public int isSend(int jobId, int stuId) {
-		String s1 = HttpRequest.sendPost(URLROOT+"get/job_apply","token=0e173882280f4303ba144b8b653c1c00&where=job_id=" + jobId + " and uid="+stuId);
+		String s1 = HttpRequest.sendPost(URLROOT+"get/job_apply","token="+TOKEN+"&where=job_id=" + jobId + " and uid="+stuId);
 		JSONObject object1 = JSONObject.parseObject(s1);
 		JSONArray data1 = object1.getJSONArray("data");
 		if (data1.size()!=0) {
@@ -460,7 +460,7 @@ public class HttpRequest {
 
 	public Admin getAdminByItemId(int id) {
 		Admin admin=new Admin();
-		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token=0e173882280f4303ba144b8b653c1c00&where=item_id="+id+"&fields=id,item_id,password,type");
+		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token="+TOKEN+"&where=item_id="+id+"&fields=id,item_id,password,type");
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -472,7 +472,7 @@ public class HttpRequest {
 
 	public Admin getAdminById(int id) {
 		Admin admin=new Admin();
-		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token=0e173882280f4303ba144b8b653c1c00&where=id="+id+"&fields=id,item_id,password,type");
+		String s=HttpRequest.sendGet(URLROOT+"get/admin", "token="+TOKEN+"&where=id="+id+"&fields=id,item_id,password,type");
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -484,7 +484,7 @@ public class HttpRequest {
 	
 	public List<CompanyCollection> getComfavoriteListById(int com_id){
 		List<CompanyCollection> list = new ArrayList<CompanyCollection>();
-		String s=HttpRequest.sendGet(URLROOT+"get/favorite_resume", "token=0e173882280f4303ba144b8b653c1c00&where=com_id="+com_id+"&fields=id,com_id,resume_id,uid,resume_name");
+		String s=HttpRequest.sendGet(URLROOT+"get/favorite_resume", "token="+TOKEN+"&where=com_id="+com_id+"&fields=id,com_id,resume_id,uid,resume_name");
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -496,7 +496,7 @@ public class HttpRequest {
 	
 	public News getNewsById(int id) {
 		News news=new News();
-		String s=HttpRequest.sendGet(URLROOT+"get/college_news", "token=0e173882280f4303ba144b8b653c1c00&where=id="+id);
+		String s=HttpRequest.sendGet(URLROOT+"get/college_news", "token="+TOKEN+"&where=id="+id);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -508,7 +508,7 @@ public class HttpRequest {
 	
 	public List<News> getNewsListByColId(int colId){
 		List<News> list = new ArrayList<News>();
-		String s=HttpRequest.sendGet(URLROOT+"get/college_news", "token=0e173882280f4303ba144b8b653c1c00&where=college_id="+colId);
+		String s=HttpRequest.sendGet(URLROOT+"get/college_news", "token="+TOKEN+"&where=college_id="+colId);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -520,7 +520,7 @@ public class HttpRequest {
 	
 	public List<StuFavorite> getStuFavoriteListById(int id){
 		List<StuFavorite> list = new ArrayList<StuFavorite>();
-		String s=HttpRequest.sendGet(URLROOT+"get/favorite_job", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+id);
+		String s=HttpRequest.sendGet(URLROOT+"get/favorite_job", "token="+TOKEN+"&where=uid="+id);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -532,7 +532,7 @@ public class HttpRequest {
 	
 	public Student getStudentByStuId(int stuId) {
 		Student student=new Student();
-		String s=HttpRequest.sendGet(URLROOT+"get/resume", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+stuId);
+		String s=HttpRequest.sendGet(URLROOT+"get/resume", "token="+TOKEN+"&where=uid="+stuId);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -544,7 +544,7 @@ public class HttpRequest {
 	
 	public List<Student> getStudentListByCollege(int collegeId,int departmentId) {
 		List<Student> list = new ArrayList<Student>();
-		String s=HttpRequest.sendPost(URLROOT+"get/resume", "token=0e173882280f4303ba144b8b653c1c00&where=college_id="+collegeId+" and dept_id="+departmentId);
+		String s=HttpRequest.sendPost(URLROOT+"get/resume", "token="+TOKEN+"&where=college_id="+collegeId+" and dept_id="+departmentId);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -556,7 +556,7 @@ public class HttpRequest {
 	
 	public StudentExp getStudentExpById(int stuId) {
 		StudentExp studentExp=new StudentExp();
-		String s=HttpRequest.sendGet(URLROOT+"get/resume_expect", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+stuId+"&fields=id,eid,uid,title,name,hy_name,job_name,province_name,city_name,jobstatus,type_name,report_name,open,def_job,idcard_status,status,edu,minsalary,maxsalary");
+		String s=HttpRequest.sendGet(URLROOT+"get/resume_expect", "token="+TOKEN+"&where=uid="+stuId+"&fields=id,eid,uid,title,name,hy_name,job_name,province_name,city_name,jobstatus,type_name,report_name,open,def_job,idcard_status,status,edu,minsalary,maxsalary");
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -568,7 +568,7 @@ public class HttpRequest {
 	
 	public List<CompanyJob> getCompanyJobListByHyname(String hyname){
 		List<CompanyJob> list = new ArrayList<CompanyJob>();
-		String s=HttpRequest.sendPost(URLROOT+"get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=hy_name=\""+hyname+"\"");
+		String s=HttpRequest.sendPost(URLROOT+"get/company_job", "token="+TOKEN+"&where=hy_name=\""+hyname+"\"");
 		
 		JSONObject object=JSONObject.parseObject(s);
 		if (object!=null) {
@@ -584,7 +584,7 @@ public class HttpRequest {
 	//获取所有职位
 	public List<CompanyJob> getAllCompanyJobList(){
 		List<CompanyJob> list = new ArrayList<CompanyJob>();
-		String s=HttpRequest.sendPost(URLROOT+"get/company_job", "token=0e173882280f4303ba144b8b653c1c00");
+		String s=HttpRequest.sendPost(URLROOT+"get/company_job", "token="+TOKEN);
 		
 		JSONObject object=JSONObject.parseObject(s);
 		if (object!=null) {
@@ -599,7 +599,7 @@ public class HttpRequest {
 	
 	public List<Department> getDepartmentListByCollegeId(int collegeId){
 		List<Department> list = new ArrayList<Department>();
-		String s=HttpRequest.sendGet(URLROOT+"get/department", "token=0e173882280f4303ba144b8b653c1c00&where=parent_id="+collegeId);
+		String s=HttpRequest.sendGet(URLROOT+"get/department", "token="+TOKEN+"&where=parent_id="+collegeId);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -611,7 +611,7 @@ public class HttpRequest {
 	
 	public List<CompanyJob> getCompanyJobList(){
 		List<CompanyJob> list = new ArrayList<CompanyJob>();
-		String s=HttpRequest.sendGet(URLROOT+"get/company_job", "token=0e173882280f4303ba144b8b653c1c00");
+		String s=HttpRequest.sendGet(URLROOT+"get/company_job", "token="+TOKEN);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -623,7 +623,7 @@ public class HttpRequest {
 	
 	public List<College> getCollegeList(){
 		List<College> list = new ArrayList<College>();
-		String s=HttpRequest.sendGet(URLROOT+"get/college", "token=0e173882280f4303ba144b8b653c1c00");
+		String s=HttpRequest.sendGet(URLROOT+"get/college", "token="+TOKEN);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -635,7 +635,7 @@ public class HttpRequest {
 	
 	public List<CompanyJobMin> getCompanyJobMinListById(int id){
 		List<CompanyJobMin> list = new ArrayList<CompanyJobMin>();
-		String s=HttpRequest.sendGet(URLROOT+"get/company_job", "token=0e173882280f4303ba144b8b653c1c00&where=com_id="+id+"&fields=id,name,jobhits,snum,status");
+		String s=HttpRequest.sendGet(URLROOT+"get/company_job", "token="+TOKEN+"&where=com_id="+id+"&fields=id,name,jobhits,snum,status");
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -659,7 +659,7 @@ public class HttpRequest {
 	
 	public List<Friend> getFriendsListById(int id){
 		List<Friend> list = new ArrayList<Friend>();
-		String s=HttpRequest.sendPost(URLROOT+"get/friends", "token=0e173882280f4303ba144b8b653c1c00&where=uid1="+id+" or uid2="+id);
+		String s=HttpRequest.sendPost(URLROOT+"get/friends", "token="+TOKEN+"&where=uid1="+id+" or uid2="+id);
 		JSONObject object=JSONObject.parseObject(s);
 		JSONArray data = object.getJSONArray("data");
 		if(data.size()!=0) {
@@ -671,60 +671,60 @@ public class HttpRequest {
 	
 	public void collectJob(StuFavorite stuFavorite) {
     	String data = JSON.toJSONString(stuFavorite);
-    	String s=HttpRequest.sendPost(URLROOT+"merge/favorite_job", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+    	String s=HttpRequest.sendPost(URLROOT+"merge/favorite_job", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 	
 	public void removeCollectStudent(int stuId,int com_id) {
-    	String s=HttpRequest.sendPost(URLROOT+"delete/favorite_resume", "token=0e173882280f4303ba144b8b653c1c00&where=resume_id="+stuId+" and com_id="+com_id);
+    	String s=HttpRequest.sendPost(URLROOT+"delete/favorite_resume", "token="+TOKEN+"&where=resume_id="+stuId+" and com_id="+com_id);
     	System.out.println(s);
 	}
 	
 	public void addFriends(Friend friend) {
 		String data = JSON.toJSONString(friend);
-		String s=HttpRequest.sendPost(URLROOT+"merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+		String s=HttpRequest.sendPost(URLROOT+"merge/friends", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 	
 	public void updateFriends(Friend friend) {
 		String data=JSON.toJSONString(friend);
-		String s=HttpRequest.sendPost(URLROOT+"merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+		String s=HttpRequest.sendPost(URLROOT+"merge/friends", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 	
 	public void removeFriends(Friend friend) {
 		String data="uid1="+friend.getUid1()+" and uid2="+friend.getUid2();
-    	String s=HttpRequest.sendPost(URLROOT+"delete/friends", "token=0e173882280f4303ba144b8b653c1c00&where="+data);
+    	String s=HttpRequest.sendPost(URLROOT+"delete/friends", "token="+TOKEN+"&where="+data);
     	System.out.println(s);
 	}
 
 	public void removeCollectJob(int jobId,int stuId) {
-    	String s=HttpRequest.sendPost(URLROOT+"delete/favorite_job", "token=0e173882280f4303ba144b8b653c1c00&where=uid="+stuId+" and job_id="+jobId);
+    	String s=HttpRequest.sendPost(URLROOT+"delete/favorite_job", "token="+TOKEN+"&where=uid="+stuId+" and job_id="+jobId);
     	System.out.println(s);
 	}
 	
 	public void updateStudent(Student student) {
 		String data=JSON.toJSONString(student);
-		String s=HttpRequest.sendPost(URLROOT+"merge/resume", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+		String s=HttpRequest.sendPost(URLROOT+"merge/resume", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 	
 	public void AddJobExpect(JobExpect jobExpect) {
 		String data = JSON.toJSONString(jobExpect);
-		String s=HttpRequest.sendPost(URLROOT+"merge/resume_expect", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+		String s=HttpRequest.sendPost(URLROOT+"merge/resume_expect", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 
 	
 	public void sendResume(JobApply jobApply) {
 		String data=JSON.toJSONString(jobApply);
-		String s=HttpRequest.sendPost(URLROOT+"merge/job_apply", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+		String s=HttpRequest.sendPost(URLROOT+"merge/job_apply", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 	
 	public void updateJob(CompanyJob companyJob) {
 		String data=JSON.toJSONString(companyJob);
-		String s=HttpRequest.sendPost(URLROOT+"merge/company_job", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
+		String s=HttpRequest.sendPost(URLROOT+"merge/company_job", "token="+TOKEN+"&data="+data);
     	System.out.println(s);
 	}
 	

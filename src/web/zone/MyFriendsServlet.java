@@ -12,7 +12,10 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import domain.Admin;
+import domain.Company;
 import domain.Friend;
+import domain.JobInterview;
+import domain.Student;
 import utils.HttpRequest;
 
 /**
@@ -29,8 +32,23 @@ public class MyFriendsServlet extends HttpServlet {
 
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
-		List<Friend> friend = httpRequest.getFriendsListById(admin.getId());
-		session.setAttribute("friends", friend);
+		List<Friend> friends = httpRequest.getFriendsListById(admin.getId());
+		if (friends != null) {
+			for(Friend friend : friends) {
+				Student student = new Student();
+				if (friend.getUid1() == admin.getId()) {
+					student = httpRequest.getStudentById(friend.getUid2());
+				}else {
+					student = httpRequest.getStudentById(friend.getUid1());
+				}
+				if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+					friend.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+				}else {
+					friend.setResume_photo("images/student.png");
+				}
+			}
+		}
+		session.setAttribute("friends", friends);
 		request.getRequestDispatcher(MYFRIENDS).forward(request, response);
 
 	}

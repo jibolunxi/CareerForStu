@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import domain.Admin;
 import domain.Company;
 import domain.Friend;
+import domain.JobApply;
+import domain.Student;
 import utils.HttpRequest;
 
 /**
@@ -29,6 +31,16 @@ public class StudentMessageServlet extends HttpServlet {
 		HttpRequest httpRequest = new HttpRequest();
 		Admin admin = (Admin) session.getAttribute("admin");
 		List<Friend> messageList = httpRequest.getMessageListById(admin.getId());
+		if (messageList != null) {
+			for(Friend friend : messageList) {
+				  Student student = httpRequest.getStudentById(friend.getUid1());
+				  if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
+					  	friend.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());
+					}else {
+						friend.setResume_photo("images/student.png");
+				  }
+			}
+		}
 		session.setAttribute("friendsList", messageList);
 		request.getRequestDispatcher(MESSAGE).forward(request, response);
 	}

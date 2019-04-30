@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import domain.Admin;
+import domain.Company;
 import domain.CompanyJob;
 import domain.StuFavorite;
 import utils.HttpRequest;
@@ -39,7 +40,12 @@ public class JobRecommendDetailServlet extends HttpServlet {
 
 			int jobId = Integer.parseInt(jobIdS);
 			CompanyJob companyJob = httpRequest.getCompanyJobById(jobId);
-			
+			Company company = httpRequest.getCompanyById(companyJob.getCom_id());
+			if (company.getLogo()!=null&&!company.getLogo().equals("")) {
+				companyJob.setLogo("http://47.96.70.17/career/"+company.getLogo());
+			}else {
+				companyJob.setLogo("images/company.png");
+			}
 			boolean isCollect = false;
 			List<StuFavorite> collectList = httpRequest.getStuFavoriteListById(admin.getId());
 			if (collectList != null) {

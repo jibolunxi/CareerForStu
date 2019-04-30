@@ -50,7 +50,7 @@
 						<h1>${mystudent.name}</h1>
 					</div>
 					<div class="aui-flex-user">
-						<img src="images/user.jpg" alt="">
+						<img src="${mystudent.resume_photo}" alt="">
 					</div>
 				</a> <a href="#" class="aui-flex b-line">
 

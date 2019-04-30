@@ -38,7 +38,7 @@
 				</div>
 				<div class="aui-head-box">
 					<div class="aui-head-user">
-						<img src="images/user.jpg" alt=""
+						<img src="${student.resume_photo}" 
 							style="position: fixed; top: 7rem; width: 5.8rem; height: 5.8rem;">
 					</div>
 
@@ -48,7 +48,6 @@
 			</div>
 			<div style="margin-top: 4rem; text-align: center"
 				class="friend-detail">
-				<c:if test="${type == 0}">
 
 					<p style="padding-bottom: 0.35rem">姓名：${student.name}</p>
 					<p style="padding-bottom: 0.35rem">
@@ -99,66 +98,6 @@
 	   				暂无
 			</c:if>
 					</p>
-				</c:if>
-				<c:if test="${type == 1}">
-
-					<p style="padding-bottom: 0.35rem">公司名：${company.name}</p>
-
-					<p style="padding-bottom: 0.35rem">
-						所属行业：
-						<c:if test="${company.hy_catalogname != null}">
-	   				${company.hy_catalogname}
-			</c:if>
-						<c:if test="${company.hy_catalogname == null}">
-	   				暂无
-			</c:if>
-					</p>
-					<p style="padding-bottom: 0.35rem">
-						公司地址：
-						<c:if test="${company.province_name != null}">
-	   				${company.province_name}${company.city_name}${company.three_cityname}
-			</c:if>
-						<c:if test="${company.province_name == null}">
-	   				暂无
-			</c:if>
-					</p>
-					<p style="padding-bottom: 0.35rem">
-						公司规模：
-						<c:if test="${company.mun_name != null}">
-	   				${company.mun_name}
-			</c:if>
-						<c:if test="${company.mun_name == null}">
-	   				暂无
-			</c:if>
-					</p>
-					<p style="padding-bottom: 0.35rem">
-						联系人：
-						<c:if test="${company.linkman != null}">
-	   				${company.linkman}
-			</c:if>
-						<c:if test="${company.linkman == null}">
-	   				暂无
-			</c:if>
-					</p>
-					<p style="padding-bottom: 0.35rem">
-						电话：
-						<c:if test="${company.linkphone != null}">
-	   				${company.linkphone}
-			</c:if>
-						<c:if test="${company.linkphone == null}">
-	   				暂无
-			</c:if>
-					</p>
-					<p style="padding-bottom: 0.35rem">
-						邮箱：
-						<c:if test="${company.linkmail != null}">
-	   				${company.linkmail}
-			</c:if>
-						<c:if test="${company.linkmail == null}">
-	   				暂无
-			</c:if>
-					</p>
-				</c:if>
 				<p>
 					<a href="removeMessage" onclick="success()" id="friend"
 						style="background-color: #FF0000; border: none; color: white; padding: 0.5rem 2rem; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer; margin-top: 2rem;">删除</a>
