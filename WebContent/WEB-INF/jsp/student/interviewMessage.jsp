@@ -96,6 +96,23 @@
 							<div class="aui-user-button" style="text-align: center"></div>
 						</a>
 					</c:if>
+					<c:if test="${jobInterview.status == 7}">
+						<a href="interviewDetail?interviewId=${jobInterview.id}"
+							class="aui-flex b-line">
+							<div class="aui-flex-user">
+								<img src="${jobInterview.company_logo}" alt=""
+									style="border-radius: 0; border: none"> <span
+									class="miss-message"></span>
+								<!--用cif-->
+							</div>
+							<div class="aui-flex-box">
+								<h2>${jobInterview.com_name}(已录取)</h2>
+								<p
+									style="font-size: small; position: absolute; right: 1rem; top: 1.45rem;">${jobInterview.send_time}</p>
+							</div>
+							<div class="aui-user-button" style="text-align: center"></div>
+						</a>
+					</c:if>
 				</c:forEach>
 			</div>
 		</section>

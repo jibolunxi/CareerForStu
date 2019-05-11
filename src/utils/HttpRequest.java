@@ -105,25 +105,16 @@ public class HttpRequest {
         String result = "";
         try {
             URL realUrl = new URL(url);
-            // 打开和URL之间的连接
             URLConnection conn = realUrl.openConnection();
-            // 设置通用的请求属性
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            //1.获取URLConnection对象对应的输出流
             out = new PrintWriter(conn.getOutputStream());
-            //2.中文有乱码的需要将PrintWriter改为如下
-            //out=new OutputStreamWriter(conn.getOutputStream(),"UTF-8")
-            // 发送请求参数
             out.print(param);
             System.out.println(param);
-            // flush输出流的缓冲
             out.flush();
-            // 定义BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
@@ -133,7 +124,6 @@ public class HttpRequest {
             System.out.println("发送 POST 请求出现异常！"+e);
             e.printStackTrace();
         }
-        //使用finally块来关闭输出流、输入流
         finally{
             try{
                 if(out!=null){
@@ -152,18 +142,7 @@ public class HttpRequest {
     }
     
     public static void main(String[] args) {
-//    	String data="{\"id\": 0,\"name\": \"chenyuhang\"}";
-//    	String s=HttpRequest.sendPost(URLRoot+"merge/admin", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
-//    	System.out.println(s);
-//    	String s=HttpRequest.sendGet(URLRoot+"delete/admin", "token=0e173882280f4303ba144b8b653c1c00&id=49");
-//    	System.out.println(s);
-//    	String data="{\"id\": 0,\"uid1\": "+1+",\"uname1\": \""+"132"+"\",\"uid2\": "+5+",\"uname2\": \""+"3243"+"\",\"status\": 0,\"msg\": \""+"hhhhhhhhhhhh"+"\"}";
-//    	String s=HttpRequest.sendPost(URLRoot+"merge/friends", "token=0e173882280f4303ba144b8b653c1c00&data="+data);
-//    	System.out.println(s);
-//    	CompanyJob companyJob = new CompanyJob();
-//    	HttpRequest httpRequest=new HttpRequest();
-//    	httpRequest.addJob(companyJob);
-//    	System.out.println(JSON.toJSONString(companyJob));
+
     }
     
     //通过名字获取登录账号
@@ -319,6 +298,33 @@ public class HttpRequest {
 			return 1;
 		}
 		return 0;
+	}
+	
+	public List<Company> getCompanyByOthers(List<String> list){
+		List<Company> companyList = new ArrayList<Company>();
+		String sql = "";
+		if(!list.isEmpty()) {
+			sql += " where ";
+			for(int i=0;i<list.size()/2;i++) {
+				sql += list.get(2*i);
+				sql += " = '";
+				sql += list.get(2*i+1);
+				sql += "'";
+				System.out.println(list.get(2*i));
+				System.out.println(list.get(2*i+1));
+				if (i<list.size()/2-1) {
+					sql += " and ";
+				}
+			}
+		}
+		String s=HttpRequest.sendPost(URLROOT+"get/company_info", "token="+TOKEN+"&"+sql);
+		JSONObject object=JSONObject.parseObject(s);
+		JSONArray data = object.getJSONArray("data");
+		if(data.size()!=0) {
+			companyList = JSONArray.parseArray(data.toString(), Company.class);
+			return companyList;
+		}
+		return null;
 	}
 	
 	//发送面试邀请
