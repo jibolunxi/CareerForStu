@@ -49,7 +49,6 @@ public class StudentHomePageServlet extends HttpServlet {
 				if (admin != null) {
 						try {
 							if ("student".equals(admin.getType())&&MD5.verify(password, "", admin.getPassword())) {
-								admin.setLogin(true);
 								Student student = httpRequest.getStudentByStuId(admin.getId());
 								if (student.getResume_photo()!=null&&!student.getResume_photo().equals("")) {
 									student.setResume_photo("http://47.96.70.17/career/"+student.getResume_photo());

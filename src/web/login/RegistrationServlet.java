@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Admin;
+import domain.Graduates;
 import domain.Origine;
 import domain.Student;
 import utils.HttpRequest;
@@ -28,9 +29,13 @@ public class RegistrationServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String number = request.getParameter("number");
 		String phone = request.getParameter("phone");
-		String message = request.getParameter("message");
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String qq = request.getParameter("qq");
+		String wx_number = request.getParameter("wx_number");
+		String school = request.getParameter("description");
+		String living = request.getParameter("living");
 		Origine origine = httpRequest.getOrigineByNumber(number);
 		if (origine != null) {
 			if (origine.getIs_registered()==0) {
@@ -63,16 +68,33 @@ public class RegistrationServlet extends HttpServlet {
 					session.setAttribute("isRight", "注册成功");
 					request.getRequestDispatcher(LOGIN).forward(request, response);
 				}else {
-					session.setAttribute("origine", "姓名与学号不匹配");
+					session.setAttribute("regist", "姓名与学号不匹配");
 					request.getRequestDispatcher(REGIST).forward(request, response);
 				}
 			}else {
-				session.setAttribute("origine", "该学生已注册");
+				session.setAttribute("regist", "该学生已注册");
 				request.getRequestDispatcher(REGIST).forward(request, response);
 			}
 		}else {
-			session.setAttribute("origine", "学生信息不存在，请联系管理员加入");
-			request.getRequestDispatcher(REGIST).forward(request, response);
+			Admin admin = new Admin();
+			admin.setId(0);
+			admin.setName(account);
+			admin.setPassword(password);
+			admin.setType("student");
+			admin.setMobile(phone);
+			httpRequest.addAdmin(admin);
+			admin = httpRequest.getAdminByName(account);
+			Graduates student = new Graduates();
+			student.setId(0);
+			student.setName(name);
+			student.setTelphone(phone);
+			student.setEmail(email);
+			student.setQq(qq);
+			student.setWxewm(wx_number);
+			student.setLiving(living);
+			httpRequest.addGraduates(student);
+			session.setAttribute("isRight", "注册成功");
+			request.getRequestDispatcher(LOGIN).forward(request, response);
 		}
 		
 		

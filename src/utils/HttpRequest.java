@@ -21,6 +21,7 @@ import domain.CompanyJob;
 import domain.CompanyJobMin;
 import domain.Department;
 import domain.Friend;
+import domain.Graduates;
 import domain.Industry;
 import domain.JobApply;
 import domain.JobInterview;
@@ -43,8 +44,8 @@ public class HttpRequest {
      *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果
      */
-	private static String URLROOT = "http://47.96.70.17/career/api/";
-//	private static String URLROOT = "http://47.96.70.17/career/service/";
+//	private static String URLROOT = "http://47.96.70.17/career/api/";
+	private static String URLROOT = "http://47.96.70.17/career/service/";
 //	private static String URLROOT = "http://47.254.22.209:8080/careerdev/api/";
 	private static String TOKEN = "0e173882280f4303ba144b8b653c1c00";
 	
@@ -758,6 +759,11 @@ public class HttpRequest {
 			return interview;
 		}
 		return null;
+	}
+
+	public void addGraduates(Graduates student) {
+		String data=JSON.toJSONString(student);
+		HttpRequest.sendPost(URLROOT+"merge/graduates", "token="+TOKEN+"&data="+data);		
 	}
 	
 }

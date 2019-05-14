@@ -3,7 +3,6 @@ package domain;
 public class Admin {
 	private int id;
 	private String name;
-	private boolean isLogin = false;
 	private int item_id;
 	private String mobile;
 	private String password;
@@ -27,12 +26,6 @@ public class Admin {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public boolean isLogin() {
-		return isLogin;
-	}
-	public void setLogin(boolean isLogin) {
-		this.isLogin = isLogin;
 	}
 	public int getItem_id() {
 		return item_id;
